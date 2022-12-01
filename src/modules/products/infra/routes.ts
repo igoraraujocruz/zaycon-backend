@@ -1,0 +1,35 @@
+import { Router } from 'express';
+import { celebrate, Segments, Joi } from 'celebrate';
+import { Controller } from './Controller';
+import uploadConfig from '../../../config/upload';
+import multer from 'multer';
+
+export const router = Router();
+const controller = new Controller();
+const upload = multer(uploadConfig.multer);
+
+router.post(
+    '/',
+    upload.array('photos'),
+    celebrate({
+        [Segments.BODY]: {
+            name: Joi.string().required(),
+            description: Joi.string().required(),
+            amount: Joi.number().required(),
+            price: Joi.number().required(),
+            points: Joi.number().required()
+        },
+    }),
+    controller.create,
+);
+
+router.get('/', 
+    celebrate({
+        [Segments.QUERY]: {
+            productSlug: Joi.string(),
+            productId: Joi.string().uuid(),
+            option: Joi.string(),
+            page: Joi.number(),
+            perPage: Joi.number()
+        },
+}), controller.get)
