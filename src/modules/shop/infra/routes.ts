@@ -34,11 +34,11 @@ router.post(
 
 router.post(
     '/webhook(/pix)?',
-/*     celebrate({
+    celebrate({
         [Segments.BODY]: {
             pix: Joi.array().required(),
         },
-    }), */
+    }),
     controller.receiveConfirmationPix,
 );
 

@@ -50,10 +50,6 @@ app.use((error: Error, _: Request, response: Response, __: NextFunction) => {
     });
   });
 
-  app.post('/webhook(/pix)?', async (req, res) => {
-    return res.send('200')
-  })
-
 app.listen(3333, () => {
     console.log('Server started on port 3333')
 })
