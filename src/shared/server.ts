@@ -15,9 +15,9 @@ const app = express()
 app.use(express.json())
 app.use('/photos', express.static(uploadConfig.uploadsFolder));
 app.use(
-    cors(/* {
+    cors({
         origin: 'http://localhost:3000',
-    } */),
+    }),
 );
 
 app.use(routes);
