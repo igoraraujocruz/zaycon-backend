@@ -7,9 +7,8 @@ import { gerarPix } from '../services/gerarPix';
 import { GetAll } from '../services/GetAll';
 import { GetBySellerId } from '../services/GetBySellerId';
 import { AppError } from '../../../shared/AppError';
-import { SendClientEmailConfirmationShop } from '../services/SendClientEmailConfirmationShop';
 import { SaveTxid } from '../services/SaveTxid';
-import { SendAdminEmailConfirmationShop } from '../services/SendAdminEmailConfirmationShop';
+import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 
 export class Controller {
     async create(
@@ -110,33 +109,18 @@ export class Controller {
 
           return response.status(200);
     }
-    
-    async sendEmailClientConfirmationShop(
+
+    async receiveConfirmationPix(
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const { email } = request.body;
+        const { txid } = request.body.pix[0]
 
-        const sendClientEmailConfirmationShop = container.resolve(
-            SendClientEmailConfirmationShop,
+        const receiveConfirmationPixAndSendEmails = container.resolve(
+            ReceiveConfirmationPixAndSendEmails,
         );
 
-        await sendClientEmailConfirmationShop.execute({ email });
-
-        return response.status(204).json();
-    }
-
-    async sendEmailAdminConfirmationShop(
-        request: Request,
-        response: Response,
-    ): Promise<Response> {
-        const { email } = request.body;
-
-        const sendAdminEmailConfirmationShop = container.resolve(
-            SendAdminEmailConfirmationShop,
-        );
-
-        await sendAdminEmailConfirmationShop.execute({ email });
+        await receiveConfirmationPixAndSendEmails.execute(txid);
 
         return response.status(204).json();
     }

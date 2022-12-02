@@ -9,9 +9,6 @@ import { AppError } from './AppError';
 import { routes } from './routes';
 import uploadConfig from '../config/upload'
 import cors from 'cors';
-import { Repository } from '../modules/shop/infra/Repository';
-import axios from 'axios';
-
 
 const app = express()
 
@@ -52,36 +49,6 @@ app.use((error: Error, _: Request, response: Response, __: NextFunction) => {
         message: error.message,
     });
   });
-
-app.post('/webhook(/pix)?', async (req, res) => {
-    const txid = req.body.pix[0].txid
-
-    const shopRepository = new Repository()    
-
-    const shop = await shopRepository.getByTxid(txid)
-
-    if(!shop) {
-        throw new AppError('Shop not found')
-    }
-
-    await axios({
-        method: 'POST',
-        url: `${process.env.API_HOST}/shop/adminemailconfirmation/`,
-        data: {
-            email: process.env.ADMIN_EMAIL
-        }
-    })
-
-    await axios({
-        method: 'POST',
-        url: `${process.env.API_HOST}/shop/clientemailconfirmation/`,
-        data: {
-            email: shop.client.email
-        }
-    })
-  
-    return res.send('200')
-  })
 
 app.listen(3333, () => {
     console.log('Server started on port 3333')

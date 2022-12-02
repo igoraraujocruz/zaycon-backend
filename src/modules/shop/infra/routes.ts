@@ -33,23 +33,13 @@ router.post(
 );
 
 router.post(
-    '/clientemailconfirmation',
+    '/webhook(/pix)?',
     celebrate({
         [Segments.BODY]: {
-            email: Joi.string().required(),
+            pix: Joi.array().required(),
         },
     }),
-    controller.sendEmailClientConfirmationShop,
-);
-
-router.post(
-    '/adminemailconfirmation',
-    celebrate({
-        [Segments.BODY]: {
-            email: Joi.string().required(),
-        },
-    }),
-    controller.sendEmailAdminConfirmationShop,
+    controller.receiveConfirmationPix,
 );
 
 router.get('/',
