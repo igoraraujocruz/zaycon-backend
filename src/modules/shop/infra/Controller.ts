@@ -122,7 +122,7 @@ export class Controller {
 
         await receiveConfirmationPixAndSendEmails.execute(txid);
 
-        return response.status(204).json();
+        return response.send(200);
     }
 
 }
