@@ -37,8 +37,8 @@ export class ReceiveConfirmationPixAndSendEmails {
                 email: `${process.env.EMAIL_CONFIG_AWS}`,
             },
             to: {
-                name: 'Admin',
-                email: `${process.env.ADMIN_EMAIL}`,
+                name: item.client.name,
+                email: item.client.email,
             },
             subject: '[Zaycon] Comprovante',
             templateData: {
