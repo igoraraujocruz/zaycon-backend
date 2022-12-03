@@ -14,8 +14,8 @@ export default {
 
     defaults: {
         from: {
-            email: process.env.EMAIL_CONFIG_AWS,
-            name: process.env.NAME_TITLE_EMAIL,
+            email: process.env.AWS_SES_EMAIL,
+            name: process.env.NAME_EMAIL,
         },
     },
 } as IMailConfig;

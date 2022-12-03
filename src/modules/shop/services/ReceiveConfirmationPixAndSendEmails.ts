@@ -33,8 +33,8 @@ export class ReceiveConfirmationPixAndSendEmails {
 
         await this.mailProvider.sendMail({
             from: {
-                name: `${process.env.NAME_TITLE_EMAIL}`,
-                email: `${process.env.EMAIL_CONFIG_AWS}`,
+                name: `${process.env.NAME_EMAIL}`,
+                email: `${process.env.AWS_SES_EMAIL}`,
             },
             to: {
                 name: item.client.name,
@@ -64,8 +64,8 @@ export class ReceiveConfirmationPixAndSendEmails {
                 email: item.client.email,
             },
             from: {
-                name: `${process.env.NAME_TITLE_EMAIL}`,
-                email: `${process.env.EMAIL_CONFIG_AWS}`,
+                name: `${process.env.NAME_EMAIL}`,
+                email: `${process.env.AWS_SES_EMAIL}`,
             },
             subject: '[Zaycon] Comprovante',
             templateData: {
