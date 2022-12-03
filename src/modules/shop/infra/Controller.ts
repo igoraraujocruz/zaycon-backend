@@ -114,14 +114,14 @@ export class Controller {
         request: Request,
         response: Response,
     ): Promise<Response> {
-/*         const { txid } = request.body.pix[0]
+        const { txid } = request.body.pix[0]
 
         const receiveConfirmationPixAndSendEmails = container.resolve(
             ReceiveConfirmationPixAndSendEmails,
         );
 
         await receiveConfirmationPixAndSendEmails.execute(txid);
- */
+
         return response.send('200');
     }
 
