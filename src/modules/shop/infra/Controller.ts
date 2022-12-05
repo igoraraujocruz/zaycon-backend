@@ -113,7 +113,7 @@ export class Controller {
     }
 
     async receiveConfirmationPix(
-        request: Request,
+        request: any,
         response: Response,
     ): Promise<Response> {
 

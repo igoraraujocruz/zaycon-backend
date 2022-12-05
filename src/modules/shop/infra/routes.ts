@@ -34,8 +34,18 @@ router.post(
 
 
 router.post(
-    '/gerencianet/webhook*',
-    controller.receiveConfirmationPix,
+    '/gerencianet/webhook/pix*', async(req: any, res) => {
+        console.log(req.client.authorized)
+        const { pix } = req.body
+        if (!req.client.authorized) {
+            return res.status(401).send('Invalid client certificate.')
+        }
+        if (pix) {
+            for await (const order of pix) {
+                console.log(order.txid)
+            }
+        }
+    }
 );
 
 router.get('/',
