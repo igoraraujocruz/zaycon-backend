@@ -18,7 +18,7 @@ interface ITokenResponse {
 @injectable()
 export class Refresh {
     constructor(
-        @inject('Repository')
+        @inject('Token')
         private repository: contract,
     ) {}
 
