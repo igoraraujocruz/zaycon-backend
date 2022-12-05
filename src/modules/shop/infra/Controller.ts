@@ -9,6 +9,8 @@ import { GetBySellerId } from '../services/GetBySellerId';
 import { AppError } from '../../../shared/AppError';
 import { SaveTxid } from '../services/SaveTxid';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
+import { addHours } from 'date-fns';
+import axios from 'axios';
 
 export class Controller {
     async create(
@@ -53,7 +55,7 @@ export class Controller {
         return response.status(200).json(instanceToPlain(item))
     }
 
-    async generateCharge(
+    async generateGerencianetCharge(
         request: Request,
         response: Response,
     ): Promise<Response> {
@@ -114,6 +116,10 @@ export class Controller {
         request: Request,
         response: Response,
     ): Promise<Response> {
+
+        if(!request.client.authorized) {
+            return response.status(401).send('Invalid client certificate.')
+        }
 
         const teste = request.body;
 

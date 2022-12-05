@@ -23,22 +23,18 @@ router.post(
 );
 
 router.post(
-    '/charge',
+    '/gerencianet',
     celebrate({
         [Segments.BODY]: {
             shopId: Joi.string().required(),
         },
     }),
-    controller.generateCharge,
-);
+    controller.generateGerencianetCharge,
+); 
+
 
 router.post(
-    '/webhook',
-/*     celebrate({
-        [Segments.BODY]: {
-            pix: Joi.array().required(),
-        },
-    }), */
+    '/gerencianet/webhook*',
     controller.receiveConfirmationPix,
 );
 

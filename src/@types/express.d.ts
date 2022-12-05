@@ -3,6 +3,9 @@ declare namespace Express {
         user: {
             id: string;
         };
+        client: {
+            authorized: string;
+        };
         files: Express.Multer.File[];
     }
 }
