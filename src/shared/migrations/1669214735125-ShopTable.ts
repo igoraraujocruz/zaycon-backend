@@ -20,7 +20,12 @@ export class ShopTable1669214735125 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
-                        name: 'txid',
+                        name: 'paid',
+                        type: 'boolean',
+                        default: false
+                    },
+                    {
+                        name: 'referenceId',
                         type: 'varchar',
                         isNullable: true
                     },

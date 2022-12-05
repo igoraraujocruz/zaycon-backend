@@ -4,7 +4,7 @@ import { Shop } from '../infra/Entity';
 import { contract } from '../interfaces/contract';
 
 @injectable()
-export class SaveTxid {
+export class SaveReferenceId {
     constructor(
         @inject('Shop')
         private repository: contract,
@@ -18,7 +18,7 @@ export class SaveTxid {
             throw new AppError('Shop not found');
         }
 
-        shop.txid = txid
+        shop.referenceId = txid
 
         return this.repository.save(shop)
     }

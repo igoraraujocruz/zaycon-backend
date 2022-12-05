@@ -24,7 +24,10 @@ export class Shop {
     typeOfPayment: string;
 
     @Column()
-    txid: string;
+    referenceId: string;
+
+    @Column()
+    paid: boolean;
 
     @Column()
     clientId: string;

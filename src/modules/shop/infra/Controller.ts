@@ -7,7 +7,7 @@ import { gerarPix } from '../services/gerarPix';
 import { GetAll } from '../services/GetAll';
 import { GetBySellerId } from '../services/GetBySellerId';
 import { AppError } from '../../../shared/AppError';
-import { SaveTxid } from '../services/SaveTxid';
+import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 import { addHours } from 'date-fns';
 import axios from 'axios';
@@ -96,11 +96,11 @@ export class Controller {
 
                 const txid = pix.cobranca.data.txid
 
-                const saveTxId = container.resolve(
-                    SaveTxid,
+                const saveReferenceId = container.resolve(
+                    SaveReferenceId,
                 );
 
-                await saveTxId.execute(txid, shop.id)
+                await saveReferenceId.execute(txid, shop.id)
         
                 return response.status(200).json(pix.qrcode.data);
                 

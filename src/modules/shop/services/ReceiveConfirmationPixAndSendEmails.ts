@@ -23,6 +23,9 @@ export class ReceiveConfirmationPixAndSendEmails {
             throw new AppError('Shop not found')
         }
 
+        item.paid = true
+
+        await this.repository.save(item)
 
         const confirmationAdminShopTemplate = path.resolve(
             __dirname,
