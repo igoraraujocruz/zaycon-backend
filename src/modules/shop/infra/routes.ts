@@ -34,10 +34,12 @@ router.post(
 
 
 router.post(
-    '/gerencianet/webhook(/pix)?', async(req: any, res) => {
-        console.log(req.body)
-        res.send('200')
-    }    
+    '/gerencianet/webhook(/pix)?',
+    celebrate({
+        [Segments.BODY]: {
+            pix: Joi.array().required(),
+        },
+    }), controller.receiveConfirmationPix   
 );
 
 router.get('/',

@@ -113,24 +113,16 @@ export class Controller {
     }
 
     async receiveConfirmationPix(
-        request: any,
+        request: Request,
         response: Response,
     ): Promise<Response> {
-
-        if(!request.client.authorized) {
-            return response.status(401).send('Invalid client certificate.')
-        }
-
-        const teste = request.body;
-
-        console.log(teste)
-        /* const { txid } = request.body.pix[0]
+        const { txid } = request.body.pix[0]
 
         const receiveConfirmationPixAndSendEmails = container.resolve(
             ReceiveConfirmationPixAndSendEmails,
         );
 
-        await receiveConfirmationPixAndSendEmails.execute(txid); */
+        await receiveConfirmationPixAndSendEmails.execute(txid);
 
         return response.send('200');
     }
