@@ -14,7 +14,7 @@ export class Controller {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        
+
         const { name, description, amount, price, points } = request.body;
 
         const create = container.resolve(Create);

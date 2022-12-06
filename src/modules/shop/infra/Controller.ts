@@ -9,28 +9,27 @@ import { GetBySellerId } from '../services/GetBySellerId';
 import { AppError } from '../../../shared/AppError';
 import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
-import { addHours } from 'date-fns';
-import axios from 'axios';
-import { io } from '../../../shared/http';
 
 export class Controller {
     async create(
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const { clientId, sellerId, typeOfPayment } =
+                
+        const { clientId, sellerId, typeOfPayment, socketId } =
             request.body;
 
         const create = container.resolve(Create);
 
         const item = await create.execute({
-            clientId, sellerId, typeOfPayment
+            clientId, sellerId, typeOfPayment, socketId
         });
 
         return response.status(200).json(item);
     }
 
     async get(request: Request, response: Response): Promise<Response> {
+
         const { sellerId, shopId } = request.query;
 
         if (sellerId) {

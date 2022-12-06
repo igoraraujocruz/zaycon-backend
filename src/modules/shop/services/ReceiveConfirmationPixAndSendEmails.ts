@@ -27,6 +27,8 @@ export class ReceiveConfirmationPixAndSendEmails {
 
         await this.repository.save(item)
 
+        io.to(item.socketId).emit("receivePaiment", {name: item.client.name}) 
+
         const confirmationAdminShopTemplate = path.resolve(
             __dirname,
             '..',
@@ -35,11 +37,11 @@ export class ReceiveConfirmationPixAndSendEmails {
         );
 
         await this.mailProvider.sendMail({
-            from: {
+            to: {
                 name: `${process.env.NAME_EMAIL}`,
                 email: `${process.env.AWS_SES_EMAIL}`,
             },
-            to: {
+            from: {
                 name: `${process.env.NAME_EMAIL}`,
                 email: `${process.env.AWS_SES_EMAIL}`,
             },
@@ -79,8 +81,6 @@ export class ReceiveConfirmationPixAndSendEmails {
                 },
             },
         });
-
-        io.emit("receivePaiment", {name: item.client.name})
 
         return item;
         

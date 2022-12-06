@@ -11,11 +11,11 @@ export class Create {
     ) {}
 
     async execute({
-        clientId, sellerId, typeOfPayment 
+        clientId, sellerId, typeOfPayment, socketId
     }: create): Promise<Shop> {
 
         const item = await this.repository.create({
-            clientId, sellerId, typeOfPayment
+            clientId, sellerId, typeOfPayment, socketId
         });
 
         return item;

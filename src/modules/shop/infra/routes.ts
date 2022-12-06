@@ -10,6 +10,7 @@ router.post(
     celebrate({
         [Segments.BODY]: {
             clientId: Joi.string().required(),
+            socketId: Joi.string().required(),
             sellerId: Joi.string(),
             typeOfPayment: Joi.string()
                 .required()

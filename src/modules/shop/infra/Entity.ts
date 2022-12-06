@@ -11,7 +11,6 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Client } from '../../clients/infra/Entity';
-import { Product } from '../../products/infra/Entity';
 import { Seller } from '../../sellers/infra/Entity';
 import { Order } from '../../orders/infra/Entity';
 
@@ -28,6 +27,9 @@ export class Shop {
 
     @Column()
     paid: boolean;
+
+    @Column()
+    socketId: string;
 
     @Column()
     clientId: string;
