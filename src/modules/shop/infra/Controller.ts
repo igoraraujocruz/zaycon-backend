@@ -11,6 +11,7 @@ import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 import { addHours } from 'date-fns';
 import axios from 'axios';
+import { io } from '../../../shared/http';
 
 export class Controller {
     async create(

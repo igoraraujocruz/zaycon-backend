@@ -4,6 +4,7 @@ import { Shop } from '../infra/Entity';
 import { contract } from '../interfaces/contract';
 import path from 'path';
 import { AppError } from '../../../shared/AppError';
+import { io } from '../../../shared/http';
 
 @injectable()
 export class ReceiveConfirmationPixAndSendEmails {
@@ -78,6 +79,8 @@ export class ReceiveConfirmationPixAndSendEmails {
                 },
             },
         });
+
+        io.emit("receivePaiment", {name: item.client.name})
 
         return item;
         
