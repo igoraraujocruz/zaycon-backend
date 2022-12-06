@@ -40,9 +40,9 @@ export class Repository implements contract {
         return item;
     }
 
-    async getByTxid(txid: string): Promise<Shop | undefined> {
+    async getByReferenceId(referenceId: string): Promise<Shop | undefined> {
         const item = await this.ormRepository.findOne({
-            where: { txid }
+            where: { referenceId }
         })
 
         return item;

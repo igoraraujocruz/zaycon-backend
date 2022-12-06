@@ -16,8 +16,7 @@ export class ReceiveConfirmationPixAndSendEmails {
 
     async execute(txid: string): Promise<Shop | undefined> {
 
-        const item = await this.repository.getByTxid(txid);
-
+        const item = await this.repository.getByReferenceId(txid);
 
         if (!item) {
             throw new AppError('Shop not found')
