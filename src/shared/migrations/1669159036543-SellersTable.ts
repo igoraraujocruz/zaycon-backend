@@ -44,7 +44,7 @@ export class SellersTable1669159036543 implements MigrationInterface {
                     {
                         name: 'isAdmin',
                         type: 'boolean',
-                        default: true,
+                        default: false,
                     },
                     {
                         name: 'password',
