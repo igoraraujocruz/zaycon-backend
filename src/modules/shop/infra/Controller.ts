@@ -70,9 +70,13 @@ export class Controller {
             throw new AppError('ShopId não encontrado')
         }
 
-        const prova = items.order.reduce((prev, curr) => {
+        const priceOfProducts = items.order.reduce((prev, curr) => {
             return prev + curr.product.price * curr.quantity
         }, 0)
+
+        const taxeGerencianet = Number((priceOfProducts*1.19/100).toFixed(2))
+
+        const totalPrice = priceOfProducts + taxeGerencianet
 
         setTimeout(async () => {
             try {
@@ -88,7 +92,11 @@ export class Controller {
                     return prev + curr.product.price * curr.quantity
                 }, 0)
 
-                if(prova != contraProva) {
+                const taxeGerencianet = Number((contraProva*1.19/100).toFixed(2))
+
+                const totalPriceContraProva = contraProva + taxeGerencianet
+
+                if(totalPrice != totalPriceContraProva) {
                     throw new AppError('Valores divergentes')
                 }
 
