@@ -27,11 +27,45 @@ export class Repository implements contract {
     }
 
     async findById(id: string): Promise<Seller | undefined> {
-        const item = this.ormRepository.findOne({
+        const item = await this.ormRepository.findOne({
             where: { id }
         })
 
         return item
+    }
+
+    async getByEmail(email: string): Promise<Seller | undefined> {
+        const item = await this.ormRepository.findOne({
+            where: { email }
+        })
+
+        return item
+    }
+
+    async getByNumberPhone(numberPhone: string): Promise<Seller | undefined> {
+        const item = await this.ormRepository.findOne({
+            where: { numberPhone }
+        })
+
+        return item
+    }
+
+    async getBySellerName(sellerName: string): Promise<Seller[] | undefined> {
+        const item = await this.ormRepository
+        .createQueryBuilder('seller')
+        .where('LOWER(seller.name) = LOWER(:sellerName)', { sellerName })
+        .getMany()
+
+        return item;
+    }
+
+    async getBySellerUsername(sellerUsername: string): Promise<Seller | undefined> {
+        const item = await this.ormRepository
+        .createQueryBuilder('seller')
+        .where('LOWER(seller.username) = LOWER(:sellerUsername)', { sellerUsername })
+        .getOne()
+
+        return item;
     }
 
     async getAll(): Promise<Seller[]> {

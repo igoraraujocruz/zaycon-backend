@@ -13,7 +13,7 @@ router.post(
             name: Joi.string().required(),
             username: Joi.string().required(),
             email: Joi.string().required(),
-            numberPhone: Joi.string().required(),
+            numberPhone: Joi.string().regex(/^[1-9]{2}[9]\d{8}$/).required(),
             password: Joi.string().required(),
             birthday: Joi.date().required()
         },
@@ -21,6 +21,11 @@ router.post(
     controller.create,
 );
 
-router.get('/', controller.getAll)
+router.get('/', celebrate({
+    [Segments.QUERY]: {
+        sellerName: Joi.string(),
+        sellerUsername: Joi.string(),
+    },
+}), controller.get)
 
 router.get('/me', ensureAuthenticated, controller.getMe)

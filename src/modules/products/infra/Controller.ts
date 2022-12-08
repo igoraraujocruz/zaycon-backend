@@ -39,7 +39,7 @@ export class Controller {
 
     async get(request: Request, response: Response): Promise<Response> {
 
-        const { option, productSlug, productId, page, perPage } = request.query;
+        const { option, productSlug, productId } = request.query;
 
         if (productSlug) {
             const get = container.resolve(GetBySlug);

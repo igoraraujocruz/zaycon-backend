@@ -4,6 +4,8 @@ import { Create } from '../services/Create';
 import { instanceToPlain } from 'class-transformer';
 import { GetMe } from '../services/GetMe';
 import { GetAll } from '../services/GetAll';
+import { GetBySellerName } from '../services/GetBySellerName';
+import { GetBySellerUsername } from '../services/GetBySellerUsername';
 
 export class Controller {
     async create(
@@ -22,11 +24,29 @@ export class Controller {
         return response.status(200).json(instanceToPlain(item));
     }
 
-    async getAll(request: Request, response: Response): Promise<Response> {
+    async get(request: Request, response: Response): Promise<Response> {
 
-        const getMe = container.resolve(GetAll)
+        const { sellerName, sellerUsername } = request.query;
 
-        const sellers = await getMe.execute();
+        if (sellerName) {
+            const get = container.resolve(GetBySellerName);
+
+            const seller = await get.execute(String(sellerName));
+
+            return response.json(instanceToPlain(seller));
+        }
+
+        if (sellerUsername) {
+            const get = container.resolve(GetBySellerUsername);
+
+            const seller = await get.execute(String(sellerUsername));
+
+            return response.json(instanceToPlain(seller));
+        }
+
+        const getAll = container.resolve(GetAll)
+
+        const sellers = await getAll.execute();
 
         return response.status(200).json(instanceToPlain(sellers)); 
     }
