@@ -32,6 +32,9 @@ export class Shop {
     socketId: string;
 
     @Column()
+    status: string;
+
+    @Column()
     clientId: string;
 
     @ManyToOne(() => Client, client => client.shop, {

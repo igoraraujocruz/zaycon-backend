@@ -3,6 +3,8 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import { Controller } from './Controller';
 import uploadConfig from '../../../config/upload';
 import multer from 'multer';
+import { ensureAuthenticated } from '../../sellers/infra/Middlewarer';
+import { ensureSellerIsAdmin } from '../../shop/infra/Middlewarer';
 
 export const router = Router();
 const controller = new Controller();
@@ -10,6 +12,8 @@ const upload = multer(uploadConfig.multer);
 
 router.post(
     '/',
+    ensureAuthenticated,
+    ensureSellerIsAdmin,
     upload.array('photos'),
     celebrate({
         [Segments.BODY]: {

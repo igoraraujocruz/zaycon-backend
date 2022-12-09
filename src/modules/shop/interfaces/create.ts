@@ -3,4 +3,5 @@ export interface create {
     socketId: string;
     clientId: string;
     sellerId?: string;
+    status: string;
 }

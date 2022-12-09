@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Controller } from './Controller';
+import { ensureAuthenticated } from '../../sellers/infra/Middlewarer';
+import { ensureSellerIsAdmin } from './Middlewarer';
 
 export const router = Router();
 const controller = new Controller();
@@ -51,3 +53,14 @@ celebrate({
     },
 }),
 controller.get)
+
+router.patch('/', celebrate({
+    [Segments.BODY]: {
+        shopId: Joi.string().uuid().required(),
+        status: Joi.string().required().valid(
+            'Preparando',
+            'Enviado',
+            'Entregue'
+        ),
+    },
+}), ensureAuthenticated, ensureSellerIsAdmin, controller.updateStatus)

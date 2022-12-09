@@ -9,6 +9,7 @@ import { GetBySellerId } from '../services/GetBySellerId';
 import { AppError } from '../../../shared/AppError';
 import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
+import { UpdateStatus } from '../services/UpdateStatus';
 
 export class Controller {
     async create(
@@ -22,7 +23,8 @@ export class Controller {
         const create = container.resolve(Create);
 
         const item = await create.execute({
-            clientId, sellerId, typeOfPayment, socketId
+            clientId, sellerId, typeOfPayment, socketId,
+            status: 'Aguardando Pagamento'
         });
 
         return response.status(200).json(item);
@@ -133,6 +135,21 @@ export class Controller {
         await receiveConfirmationPixAndSendEmails.execute(txid);
 
         return response.send('200');
+    }
+
+    async updateStatus(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const { shopId, status } = request.body
+
+        const updateStatus = container.resolve(
+            UpdateStatus,
+        );
+
+        const shop = await updateStatus.execute(shopId, status);
+
+        return response.status(200).json(shop);
     }
 
 }

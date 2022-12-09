@@ -29,6 +29,10 @@ export class ShopTable1669214735125 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
+                        name: 'status',
+                        type: 'varchar',
+                    },
+                    {
                         name: 'referenceId',
                         type: 'varchar',
                         isNullable: true
