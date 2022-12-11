@@ -30,7 +30,7 @@ export class ReceiveConfirmationPixAndSendEmails {
 
         await this.repository.save(item)
 
-        const points = item.order.reduce((prev, curr) => {
+        /* const points = item.order.reduce((prev, curr) => {
             return prev + curr.product.points * curr.quantity
         }, 0)
 
@@ -42,9 +42,11 @@ export class ReceiveConfirmationPixAndSendEmails {
 
         seller.points += points
         
-        await this.seller.save(seller)
+        await this.seller.save(seller) */
 
         io.to(item.socketId).emit("receivePaiment", {name: item.client.name}) 
+
+        io.emit("receivePaimentAdmin") 
 
         const confirmationAdminShopTemplate = path.resolve(
             __dirname,
@@ -100,7 +102,7 @@ export class ReceiveConfirmationPixAndSendEmails {
         });
 
 
-        const confirmationSellerShopTemplate = path.resolve(
+       /*  const confirmationSellerShopTemplate = path.resolve(
             __dirname,
             '..',
             'views',
@@ -125,7 +127,9 @@ export class ReceiveConfirmationPixAndSendEmails {
                     link: 'link',
                 },
             },
-        });
+        }); */
+
+
         return item;
         
     }

@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { Shop } from '../infra/Entity';
 import { contract } from '../interfaces/contract';
 import { create } from '../interfaces/create';
+import { io } from '../../../shared/http';
 
 @injectable()
 export class Create {
@@ -17,6 +18,8 @@ export class Create {
         const item = await this.repository.create({
             clientId, sellerId, typeOfPayment, socketId, status
         });
+
+        io.emit("createShop") 
 
         return item;
     }
