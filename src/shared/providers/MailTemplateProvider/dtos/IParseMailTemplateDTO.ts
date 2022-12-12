@@ -4,5 +4,5 @@ interface ITemplateVariables {
 
 export interface IParseMailTemplateDTO {
     file: string;
-    variables: ITemplateVariables;
+    variables?: ITemplateVariables;
 }
