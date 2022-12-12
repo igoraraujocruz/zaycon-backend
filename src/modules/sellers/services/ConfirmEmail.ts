@@ -1,44 +1,52 @@
 import { inject, injectable } from 'tsyringe';
-import { Seller } from '../infra/Entity';
-import { contract } from '../interfaces/contract';
 import path from 'path';
 import { v4 as uuid } from 'uuid'
-import { findEmail } from '../interfaces/findEmail';
-import { contract as hashContract } from '../../../shared/providers/hash/contract';
-import { AppError } from '../../../shared/AppError';
+import { IMailProvider } from '../../../shared/providers/MailProvider/models/IMailProvider';
+import { Seller } from '../infra/Entity';
+import { contract as tokenContract } from '../../sessions/interfaces/contract'
 
 @injectable()
 export class ConfirmEmail {
     constructor(
-        @inject('Seller')
-        private seller: contract,
-        @inject('Hash')
-        private hash: hashContract,
+        @inject('MailProvider')
+        private mailProvider: IMailProvider,
+        @inject('Token')
+        private token: tokenContract,
     ) {}
 
-    async execute({
-     token    
-    }: findEmail): Promise<string> {
+    async execute(seller: Seller): Promise<void> {
 
-        const id = token
-
-        const seller = await this.seller.findById(id);
-
-        if (!seller) {
-            throw new AppError('Username ou a senha invalidos', 401);
-        }
-
-        const tokenMatched = await this.hash.compareHash(
-            token,
-            seller.password,
+        const confirmationEmailTemplate = path.resolve(
+            __dirname,
+            '..',
+            'views',
+            'confirmEmail.hbs',
         );
 
-        if(!tokenMatched) {
-            throw new AppError('Token invalido')
-        }
+        const token = uuid();
 
-        const goiaba = 'aa'
+        await this.token.create({
+            refreshToken: token,
+            sellerId: seller.id,
+        })
 
-        return 'Email confirmado'
+        await this.mailProvider.sendMail({
+            to: {
+                name: seller.name,
+                email: seller.email,
+            },
+            from: {
+                name: `${process.env.NAME_EMAIL}`,
+                email: `${process.env.AWS_SES_EMAIL}`,
+            },
+            subject: '[Zaycon] Confirmação de Email',
+            templateData: {
+                file: confirmationEmailTemplate,
+                variables: {
+                    name: seller.name,
+                    link: `${process.env.WEB_HOST}/emailConfirmation?token=${token}`,
+                },
+            },
+        });
     }
 }

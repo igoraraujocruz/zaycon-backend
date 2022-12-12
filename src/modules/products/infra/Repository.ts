@@ -39,6 +39,14 @@ export class Repository implements contract {
 
         return item;
     }
+
+    async findByName(name: string): Promise<Product | undefined> {
+        const item = this.ormRepository.findOne({
+            where: { name },
+        });
+
+        return item;
+    }
     
     async findAllByName(name: string): Promise<Product[]> {
         const item = this.ormRepository

@@ -25,6 +25,7 @@ export class TokenTable1669163989181 implements MigrationInterface {
                     {
                         name: 'expiresDate',
                         type: 'timestamp',
+                        isNullable: true,
                     },
                     {
                         name: 'createdAt',

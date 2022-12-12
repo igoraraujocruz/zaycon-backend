@@ -6,6 +6,10 @@ import { GetMe } from '../services/GetMe';
 import { GetAll } from '../services/GetAll';
 import { GetBySellerName } from '../services/GetBySellerName';
 import { GetBySellerUsername } from '../services/GetBySellerUsername';
+import { ConfirmEmail } from '../services/ConfirmEmail';
+import { ReceiveConfirmationEmail } from '../services/ReceiveConfirmationEmail';
+import { SendForgotPasswordEmailService } from '../services/SendForgotPasswordEmail';
+import { ResetPassword } from '../services/ResetPassword';
 
 export class Controller {
     async create(
@@ -15,11 +19,17 @@ export class Controller {
         const { name, username, password, email, numberPhone, birthday } =
             request.body;
 
+            const numberPhoneFormated = numberPhone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
+
         const create = container.resolve(Create);
 
         const item = await create.execute({
-            name, username, password, email, numberPhone, birthday
+            name, username, password, email, numberPhone: numberPhoneFormated, birthday
         });
+
+        const confirmEmail = container.resolve(ConfirmEmail)
+
+        await confirmEmail.execute(item)
 
         return response.status(200).json(instanceToPlain(item));
     }
@@ -59,5 +69,48 @@ export class Controller {
         const seller = await getMe.execute(id);
 
         return response.status(200).json(instanceToPlain(seller)); 
+    }
+
+    async confirmEmail(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const { token } = request.params;
+
+        const confirmationEmail = container.resolve(ReceiveConfirmationEmail);
+
+        await confirmationEmail.execute(token);
+
+        return response.status(204).json();
+    }
+
+    async forgotPassword(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const { email } = request.body;
+
+        const sendForgotPasswordEmail = container.resolve(
+            SendForgotPasswordEmailService,
+        );
+
+        await sendForgotPasswordEmail.execute({ email });
+
+        return response.status(204).json();
+    }
+
+    async resetPassword(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+
+        const { token } = request.params;
+        const { password } = request.body;
+
+        const resetPassword = container.resolve(ResetPassword);
+
+        await resetPassword.execute({ token, password });
+
+        return response.status(204).json();
     }
 }

@@ -1,5 +1,5 @@
 export interface create {
     sellerId: string;
-    expiresDate: Date;
+    expiresDate?: Date;
     refreshToken: string;
 }

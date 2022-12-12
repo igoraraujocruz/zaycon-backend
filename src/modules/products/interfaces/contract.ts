@@ -5,6 +5,7 @@ export interface contract {
     create({ name, description, amount, price, slug}: create): Promise<Product>;
     getAll(): Promise<Product[]>
     findBySlug(slug: string): Promise<Product | undefined>;
+    findByName(name: string): Promise<Product | undefined>;
     findById(productId: string): Promise<Product | undefined>;
     findAllByName(name: string): Promise<Product[]>;
     save(user: Product): Promise<Product>;

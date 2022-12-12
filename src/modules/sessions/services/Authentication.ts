@@ -37,10 +37,14 @@ export class Authentication {
     ) {}
 
     public async execute({ username, password }: IRequest): Promise<IResponse> {
-        const seller = await this.seller.findByUsername(username);
+        const seller = await this.seller.getBySellerUsername(username);
 
         if (!seller) {
             throw new AppError('Username ou a senha invalidos', 401);
+        }
+
+        if(seller.emailConfirm === false) {
+            throw new AppError('Você deve confirmar o seu email antes de acessar nossa plataforma. Por favor, clique no link que te encaminhamos via email', 401);
         }
 
         const passwordMatched = await this.hash.compareHash(

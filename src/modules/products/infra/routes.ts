@@ -37,3 +37,20 @@ router.get('/',
             perPage: Joi.number()
         },
 }), controller.get)
+
+router.put(
+    '/',
+    ensureAuthenticated,
+    ensureSellerIsAdmin,
+    celebrate({
+        [Segments.BODY]: {
+            id: Joi.string().uuid().required(),
+            name: Joi.string(),
+            description: Joi.string(),
+            price: Joi.number(),
+            points: Joi.number(),
+            amount: Joi.number(),
+        },
+    }),
+    controller.update,
+);

@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { Shop } from '../infra/Entity';
 import { contract } from '../interfaces/contract';
 import { contract as sellerContract } from '../../sellers/interfaces/contract';
+import { contract as productContract } from '../../products/interfaces/contract';
 import path from 'path';
 import { AppError } from '../../../shared/AppError';
 import { io } from '../../../shared/http';
@@ -12,6 +13,8 @@ export class ReceiveConfirmationPixAndSendEmails {
     constructor(
         @inject('Shop')
         private repository: contract,
+        @inject('Product')
+        private product: productContract,
         @inject('MailProvider')
         private mailProvider: IMailProvider,
         @inject('Seller')
@@ -28,9 +31,20 @@ export class ReceiveConfirmationPixAndSendEmails {
 
         item.paid = true
 
+        item.order.map(async (oldOrder) => {
+            const product = await this.product.findById(oldOrder.productId)
+
+            if(product) {
+                 product.amount -= oldOrder.quantity
+                 await this.product.save(product)
+            }
+
+        })
+
         await this.repository.save(item)
 
-        /* const points = item.order.reduce((prev, curr) => {
+
+        const points = item.order.reduce((prev, curr) => {
             return prev + curr.product.points * curr.quantity
         }, 0)
 
@@ -42,7 +56,7 @@ export class ReceiveConfirmationPixAndSendEmails {
 
         seller.points += points
         
-        await this.seller.save(seller) */
+        await this.seller.save(seller)
 
         io.to(item.socketId).emit("receivePaiment", {name: item.client.name}) 
 
@@ -102,7 +116,7 @@ export class ReceiveConfirmationPixAndSendEmails {
         });
 
 
-       /*  const confirmationSellerShopTemplate = path.resolve(
+         const confirmationSellerShopTemplate = path.resolve(
             __dirname,
             '..',
             'views',
@@ -127,7 +141,7 @@ export class ReceiveConfirmationPixAndSendEmails {
                     link: 'link',
                 },
             },
-        }); */
+        }); 
 
 
         return item;

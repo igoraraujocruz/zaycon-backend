@@ -8,6 +8,7 @@ import { GetBySlug } from '../services/GetBySlug';
 import { GetById } from '../services/GetById';
 import { GetAllByName } from '../services/GetAllByName';
 import { Upload } from '../../photos/services/Upload'
+import { Update } from '../services/Update';
 
 export class Controller {
     async create(
@@ -70,5 +71,26 @@ export class Controller {
         const item = await getAll.execute()
 
         return response.status(200).json(instanceToPlain(item))
+    }
+
+
+    async update(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const {id, name, description, price, points, amount } = request.body;
+
+        const updateProduct = container.resolve(Update);
+
+        const productUpdated = await updateProduct.execute({
+            id,
+            name,
+            description,
+            price,
+            points,
+            amount
+        });
+
+        return response.json(instanceToPlain(productUpdated));
     }
 }
