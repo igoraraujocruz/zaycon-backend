@@ -45,6 +45,10 @@ router.post(
     }), controller.receiveConfirmationPix   
 );
 
+router.post(
+    '/teste', controller.teste   
+);
+
 router.get('/',
 celebrate({
     [Segments.QUERY]: {

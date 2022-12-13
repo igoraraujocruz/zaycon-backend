@@ -138,6 +138,18 @@ export class Controller {
         return response.send('200');
     }
 
+    async teste(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+
+        const teste = request.body;
+
+        console.log(teste)
+
+        return response.send('200');
+    }
+
     async updateStatus(
         request: Request,
         response: Response,
