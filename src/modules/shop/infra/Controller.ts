@@ -10,6 +10,8 @@ import { AppError } from '../../../shared/AppError';
 import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 import { UpdateStatus } from '../services/UpdateStatus';
+import axios from 'axios';
+import qs from 'qs';
 
 export class Controller {
     async create(
@@ -146,6 +148,17 @@ export class Controller {
         const teste = request.body;
 
         console.log(teste)
+
+        const data = { 'id': '5527997998675', 'message': 'oláaaaa' };
+
+        const options = {
+            method: 'POST',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            data: qs.stringify(data),
+            url: 'http://localhost:3333/message/text?key=111',
+          };
+
+        axios(options)
 
         return response.send('200');
     }
