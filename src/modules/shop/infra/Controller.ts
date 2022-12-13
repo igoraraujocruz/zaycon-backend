@@ -151,14 +151,9 @@ export class Controller {
 
         const data = { 'id': '5527997998675', 'message': 'oláaaaa' };
 
-        const options = {
-            method: 'POST',
-            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-            data: qs.stringify(data),
-            url: 'http://localhost:3333/message/text?key=111',
-          };
-
-        axios(options)
+        axios.post('https://webhook.site/2d0ff8cb-a765-4c0b-98e5-4a374c911e18', {
+            data
+        })
 
         return response.send('200');
     }
