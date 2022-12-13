@@ -126,16 +126,14 @@ export class Controller {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const teste = request.body;
 
-        console.log(teste)
-        /* const { txid } = request.body.pix[0]
+        const { txid } = request.body.pix[0]
 
         const receiveConfirmationPixAndSendEmails = container.resolve(
             ReceiveConfirmationPixAndSendEmails,
         );
 
-        await receiveConfirmationPixAndSendEmails.execute(txid); */
+        await receiveConfirmationPixAndSendEmails.execute(txid);
 
         return response.send('200');
     }
