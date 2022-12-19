@@ -10,8 +10,6 @@ import { AppError } from '../../../shared/AppError';
 import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 import { UpdateStatus } from '../services/UpdateStatus';
-import axios from 'axios';
-import qs from 'qs';
 
 export class Controller {
     async create(
@@ -136,24 +134,6 @@ export class Controller {
         );
 
         await receiveConfirmationPixAndSendEmails.execute(txid);
-
-        return response.send('200');
-    }
-
-    async teste(
-        request: Request,
-        response: Response,
-    ): Promise<Response> {
-
-        const teste = request.body;
-
-        console.log(teste)
-
-        const data = { 'id': '5527997998675', 'message': 'oláaaaa' };
-
-        axios.post('https://webhook.site/2d0ff8cb-a765-4c0b-98e5-4a374c911e18', {
-            data
-        })
 
         return response.send('200');
     }
