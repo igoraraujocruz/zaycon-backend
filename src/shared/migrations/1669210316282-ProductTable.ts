@@ -28,6 +28,10 @@ export class ProductTable1669210316282 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
+                        name: 'category',
+                        type: 'varchar',
+                    },
+                    {
                         name: 'amount',
                         type: 'int',
                     },

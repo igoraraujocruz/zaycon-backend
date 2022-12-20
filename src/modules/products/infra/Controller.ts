@@ -9,6 +9,7 @@ import { GetById } from '../services/GetById';
 import { GetAllByName } from '../services/GetAllByName';
 import { Upload } from '../../photos/services/Upload'
 import { Update } from '../services/Update';
+import { GetByCategory } from '../services/GetByCategory';
 
 export class Controller {
     async create(
@@ -16,13 +17,14 @@ export class Controller {
         response: Response,
     ): Promise<Response> {
 
-        const { name, description, amount, price, points } = request.body;
+        const { name, description, amount, price, points, category } = request.body;
+
 
         const create = container.resolve(Create);
         const uploadPhotos = container.resolve(Upload);
 
         const product = await create.execute({
-            name, description, amount, price, points,
+            name, description, amount, price, points, category,
             slug: slugify(name, {
                 lower: true,
             }), 
@@ -40,7 +42,7 @@ export class Controller {
 
     async get(request: Request, response: Response): Promise<Response> {
 
-        const { option, productSlug, productId } = request.query;
+        const { option, productSlug, productId, category } = request.query;
 
         if (productSlug) {
             const get = container.resolve(GetBySlug);
@@ -62,6 +64,14 @@ export class Controller {
             const get = container.resolve(GetAllByName);
 
             const product = await get.execute(String(option));
+
+            return response.json(instanceToPlain(product));
+        }
+
+        if (category) {
+            const get = container.resolve(GetByCategory);
+
+            const product = await get.execute(String(category));
 
             return response.json(instanceToPlain(product));
         }

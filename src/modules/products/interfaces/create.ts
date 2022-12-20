@@ -5,4 +5,5 @@ export interface create {
     price: number;
     points: number;
     slug: string;
+    category: string;
 }

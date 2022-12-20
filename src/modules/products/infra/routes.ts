@@ -21,7 +21,8 @@ router.post(
             description: Joi.string().required(),
             amount: Joi.number().required(),
             price: Joi.number().required(),
-            points: Joi.number().required()
+            points: Joi.number().required(),
+            category: Joi.string().required(),
         },
     }),
     controller.create,
@@ -34,7 +35,8 @@ router.get('/',
             productId: Joi.string().uuid(),
             option: Joi.string(),
             page: Joi.number(),
-            perPage: Joi.number()
+            perPage: Joi.number(),
+            category: Joi.string(),
         },
 }), controller.get)
 
