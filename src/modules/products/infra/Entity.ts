@@ -34,6 +34,9 @@ export class Product {
     price: number;
 
     @Column()
+    destaque: boolean;
+
+    @Column()
     points: number;
 
     @Column()

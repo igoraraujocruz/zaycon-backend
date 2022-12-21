@@ -6,4 +6,5 @@ export interface create {
     points: number;
     slug: string;
     category: string;
+    destaque: boolean;
 }

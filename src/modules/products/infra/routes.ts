@@ -23,6 +23,7 @@ router.post(
             price: Joi.number().required(),
             points: Joi.number().required(),
             category: Joi.string().required(),
+            destaque: Joi.boolean(),
         },
     }),
     controller.create,
@@ -52,6 +53,7 @@ router.put(
             price: Joi.number(),
             points: Joi.number(),
             amount: Joi.number(),
+            destaque: Joi.boolean()
         },
     }),
     controller.update,

@@ -5,4 +5,5 @@ export interface Update {
     price: number;
     points: number;
     amount: number;
+    destaque: boolean;
 }

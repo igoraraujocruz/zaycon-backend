@@ -17,7 +17,7 @@ export class Controller {
         response: Response,
     ): Promise<Response> {
 
-        const { name, description, amount, price, points, category } = request.body;
+        const { name, description, amount, price, points, category, destaque } = request.body;
 
 
         const create = container.resolve(Create);
@@ -25,6 +25,7 @@ export class Controller {
 
         const product = await create.execute({
             name, description, amount, price, points, category,
+            destaque,
             slug: slugify(name, {
                 lower: true,
             }), 
@@ -88,7 +89,7 @@ export class Controller {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const {id, name, description, price, points, amount } = request.body;
+        const {id, name, description, price, points, amount, destaque } = request.body;
 
         const updateProduct = container.resolve(Update);
 
@@ -98,7 +99,8 @@ export class Controller {
             description,
             price,
             points,
-            amount
+            amount,
+            destaque,
         });
 
         return response.json(instanceToPlain(productUpdated));

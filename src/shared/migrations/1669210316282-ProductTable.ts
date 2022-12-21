@@ -32,6 +32,11 @@ export class ProductTable1669210316282 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
+                        name: 'destaque',
+                        type: 'boolean',
+                        default: false
+                    },
+                    {
                         name: 'amount',
                         type: 'int',
                     },
