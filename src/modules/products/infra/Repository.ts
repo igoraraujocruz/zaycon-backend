@@ -1,4 +1,4 @@
-import { getRepository, Repository as TypeormRepository } from 'typeorm';
+import { getRepository, ILike, Repository as TypeormRepository } from 'typeorm';
 import { contract } from '../interfaces/contract';
 import { Product } from './Entity';
 import { create } from '../interfaces/create'
@@ -60,12 +60,12 @@ export class Repository implements contract {
     }
     
     async findAllByName(name: string): Promise<Product[]> {
-        const item = this.ormRepository
-        .createQueryBuilder('product')
-        .leftJoinAndSelect('product.photos', 'photos')
-        .leftJoinAndSelect('product.user', 'user')
-        .where('LOWER(product.name) = LOWER(:name)', { name })
-        .getMany();
+
+        const item = await this.ormRepository.find({
+            where: {
+                name: ILike(`%${name}%`)
+            }
+        })
 
         return item;
     }
