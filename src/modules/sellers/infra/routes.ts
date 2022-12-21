@@ -11,7 +11,7 @@ router.post(
     celebrate({
         [Segments.BODY]: {
             name: Joi.string().required(),
-            username: Joi.string().required(),
+            username: Joi.string().required().regex(/^[a-zA-Z0-9]+$/),
             email: Joi.string().required(),
             numberPhone: Joi.string().regex(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/).required(),
             password: Joi.string().required().min(6),
