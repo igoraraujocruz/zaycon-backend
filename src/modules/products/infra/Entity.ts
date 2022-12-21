@@ -9,7 +9,6 @@ import {
     OneToOne,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { Shop } from '../../shop/infra/Entity';
 import { Photo } from '../../photos/infra/Entity';
 import { Order } from '../../orders/infra/Entity';
 
