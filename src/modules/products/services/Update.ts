@@ -18,7 +18,8 @@ export class Update {
         points,
         amount,
         price,
-        destaque
+        destaque,
+        category
     }: IUpdate): Promise<Product> {
         const product = await this.repository.findById(id);
 
@@ -42,6 +43,7 @@ export class Update {
         product.amount = amount;
         product.price = price;
         product.destaque = destaque;
+        product.category = category;
         
         return this.repository.save(product);
     }

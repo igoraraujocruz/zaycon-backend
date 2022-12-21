@@ -89,7 +89,7 @@ export class Controller {
         request: Request,
         response: Response,
     ): Promise<Response> {
-        const {id, name, description, price, points, amount, destaque } = request.body;
+        const {id, name, description, price, points, amount, destaque, category } = request.body;
 
         const updateProduct = container.resolve(Update);
 
@@ -101,6 +101,7 @@ export class Controller {
             points,
             amount,
             destaque,
+            category
         });
 
         return response.json(instanceToPlain(productUpdated));

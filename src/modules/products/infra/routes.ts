@@ -53,7 +53,8 @@ router.put(
             price: Joi.number(),
             points: Joi.number(),
             amount: Joi.number(),
-            destaque: Joi.boolean()
+            destaque: Joi.boolean(),
+            category: Joi.string()
         },
     }),
     controller.update,

@@ -6,4 +6,5 @@ export interface Update {
     points: number;
     amount: number;
     destaque: boolean;
+    category: string;
 }
