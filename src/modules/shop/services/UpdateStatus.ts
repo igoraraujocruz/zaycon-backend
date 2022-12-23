@@ -39,7 +39,7 @@ export class UpdateStatus {
                     name: `${process.env.NAME_EMAIL}`,
                     email: `${process.env.AWS_SES_EMAIL}`,
                 },
-                subject: '[Zaycon] Estamos preparando a sua compra',
+                subject: '[Zaycon] Estamos preparando a sua compra 📦',
                 templateData: {
                     file: prepareShopEmailTemplate,
                     variables: {
@@ -66,7 +66,7 @@ export class UpdateStatus {
                     name: `${process.env.NAME_EMAIL}`,
                     email: `${process.env.AWS_SES_EMAIL}`,
                 },
-                subject: '[Zaycon] Sua compra está chegando',
+                subject: '[Zaycon] Sua compra está chegando 🚚',
                 templateData: {
                     file: sendShopEmailTemplate,
                     variables: {
@@ -93,7 +93,7 @@ export class UpdateStatus {
                     name: `${process.env.NAME_EMAIL}`,
                     email: `${process.env.AWS_SES_EMAIL}`,
                 },
-                subject: '[Zaycon] Sua compra foi entregue',
+                subject: '[Zaycon] Sua compra foi entregue 🎆',
                 templateData: {
                     file: finishShopEmailTemplate,
                     variables: {

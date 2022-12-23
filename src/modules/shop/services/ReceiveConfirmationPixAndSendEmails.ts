@@ -68,20 +68,20 @@ export class ReceiveConfirmationPixAndSendEmails {
     
     
             await this.mailProvider.sendMail({
-                to: {
-                    name: seller.name,
-                    email: seller.email,
-                },
                 from: {
                     name: `${process.env.NAME_EMAIL}`,
                     email: `${process.env.AWS_SES_EMAIL}`,
                 },
-                subject: '[Zaycon] Venda Realizada!',
+                to: {
+                    name: seller.name,
+                    email: seller.email,
+                },
+                subject: `[Zaycon] ${item.client.name} acabou de comprar e você acabou de ganhar!!!`,
                 templateData: {
                     file: confirmationSellerShopTemplate,
                     variables: {
-                        name: 'user.name',
-                        link: 'link',
+                        nameSeller: seller.name,
+                        nameClient: item.client.name
                     },
                 },
             }); 
@@ -105,20 +105,23 @@ export class ReceiveConfirmationPixAndSendEmails {
         );
 
         await this.mailProvider.sendMail({
-            to: {
-                name: `${process.env.NAME_EMAIL}`,
-                email: `${process.env.AWS_SES_EMAIL}`,
-            },
             from: {
                 name: `${process.env.NAME_EMAIL}`,
                 email: `${process.env.AWS_SES_EMAIL}`,
             },
-            subject: '[Zaycon] Comprovante',
+            to: {
+                name: `${process.env.NAME_EMAIL}`,
+                email: `${process.env.AWS_SES_EMAIL}`,
+            },
+            subject: `[Zaycon] Compra realizada por ${item.client.name}`,
             templateData: {
                 file: confirmationAdminShopTemplate,
                 variables: {
-                    name: 'user.name',
-                    link: 'link',
+                    nameClient: item.client.name,
+                    addressClient: item.client.address,
+                    cepClient: item.client.cep,
+                    emailClient: item.client.email,
+                    numberPhoneClient: item.client.numberPhone
                 },
             },
         });
@@ -132,20 +135,23 @@ export class ReceiveConfirmationPixAndSendEmails {
 
 
         await this.mailProvider.sendMail({
-            to: {
-                name: 'user.name',
-                email: item.client.email,
-            },
             from: {
                 name: `${process.env.NAME_EMAIL}`,
                 email: `${process.env.AWS_SES_EMAIL}`,
             },
-            subject: '[Zaycon] Comprovante',
+            to: {
+                name: item.client.name,
+                email: item.client.email,
+            },
+            subject: '[Zaycon] Recebemos o seu pagamento!',
             templateData: {
                 file: confirmationClientShopTemplate,
                 variables: {
-                    name: 'user.name',
-                    link: 'link',
+                    name: item.client.name,
+                    orders: item.order.map(order => {
+                        return (
+                            order.quantity, order.product.name
+                    )}),
                 },
             },
         });
