@@ -12,10 +12,12 @@ export class Controller {
         const { name, cep, address, email, numberPhone } =
             request.body;
 
+            const numberPhoneFormated = numberPhone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
+
         const create = container.resolve(Create);
 
         const item = await create.execute({
-            name, cep, address, email, numberPhone
+            name, cep, address, email, numberPhone: numberPhoneFormated
         });
 
         return response.status(200).json(item);

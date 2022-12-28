@@ -7,6 +7,7 @@ import { contract as productContract } from '../../products/interfaces/contract'
 import path from 'path';
 import { AppError } from '../../../shared/AppError';
 import { io } from '../../../shared/http';
+import axios from 'axios';
 
 @injectable()
 export class ReceiveConfirmationPixAndSendEmails {
@@ -28,6 +29,8 @@ export class ReceiveConfirmationPixAndSendEmails {
         if (!item) {
             throw new AppError('Shop not found')
         }
+
+        const { data } = await axios.get('http://localhost:3334/instance/info?key=1')
 
         item.paid = true
 
@@ -59,6 +62,11 @@ export class ReceiveConfirmationPixAndSendEmails {
         
             await this.seller.save(seller)
 
+            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+                id: `55${seller.numberPhone}`,
+                message: `${item.client.name}, efetuou uma compra e por isso você acaba de ganhar ${points} na Zaycon. 😄`
+            }) 
+
             const confirmationSellerShopTemplate = path.resolve(
                 __dirname,
                 '..',
@@ -89,13 +97,20 @@ export class ReceiveConfirmationPixAndSendEmails {
             
         } catch(err) {
             //no-error
-        }
-
-        
+        }        
 
         io.to(item.socketId).emit("receivePaiment", {name: item.client.name}) 
 
         io.emit("receivePaimentAdmin") 
+
+        try {
+            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+                id: '5527999147896',
+                message: `${item.client.name} efetuou uma compra!`
+            }) 
+        } catch(err) {
+            //no
+        }
 
         const confirmationAdminShopTemplate = path.resolve(
             __dirname,
@@ -125,6 +140,15 @@ export class ReceiveConfirmationPixAndSendEmails {
                 },
             },
         });
+
+        try {
+            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+                id: `55${item.client.numberPhone}`,
+                message: `${item.client.name}, recebemos o seu pagamento! Assim que o status da sua compra alterar te informaremos pelo Whatsapp e Email.`
+            }) 
+        } catch(err) {
+            //no
+        }
 
         const confirmationClientShopTemplate = path.resolve(
             __dirname,

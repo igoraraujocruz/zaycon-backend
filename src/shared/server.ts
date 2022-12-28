@@ -1,7 +1,7 @@
 import { io, serverHttp } from './http';
 
 io.on("connection", async (socket) => {
-    io.to(socket.id).emit("mySocketId", socket.id)
+    await io.to(socket.id).emit("mySocketId", socket.id)
 })
 
 serverHttp.listen(3333, () => {
