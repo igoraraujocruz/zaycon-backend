@@ -99,7 +99,7 @@ export class UpdateStatus {
 
         if(status === 'Entregue') {
 
-            await axios.post(`h${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
+            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: `55${shop.client.numberPhone}`,
                 message: `Muito obrigado por comprar com a gente, ${shop.client.name}. Esperamos te ver novamente 😉`
             }) 
