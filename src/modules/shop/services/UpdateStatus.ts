@@ -19,7 +19,7 @@ export class UpdateStatus {
 
         const shop = await this.repository.getById(shopId);
 
-        const { data } = await axios.get('http://localhost:3334/instance/info?key=1')
+        const { data } = await axios.get(`${process.env.WHATSAPP_INSTANCE_URL}/instance/info?key=1`)
 
         const phoneConnected = data.instance_data.phone_connected
 
@@ -33,7 +33,7 @@ export class UpdateStatus {
         }
 
          if(status === 'Preparando') {
-                await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+                await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: `55${shop.client.numberPhone}`,
                 message: `${shop.client.name}, já estamos preparando a sua compra e em poucos instantes ela será enviada...`
             }) 
@@ -66,7 +66,7 @@ export class UpdateStatus {
 
         if(status === 'Enviado') {
 
-            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: `55${shop.client.numberPhone}`,
                 message: `${shop.client.name}, sua compra está a caminho!`
             }) 
@@ -99,7 +99,7 @@ export class UpdateStatus {
 
         if(status === 'Entregue') {
 
-            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+            await axios.post(`h${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: `55${shop.client.numberPhone}`,
                 message: `Muito obrigado por comprar com a gente, ${shop.client.name}. Esperamos te ver novamente 😉`
             }) 

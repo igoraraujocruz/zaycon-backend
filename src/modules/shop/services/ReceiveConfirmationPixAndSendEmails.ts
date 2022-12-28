@@ -30,7 +30,7 @@ export class ReceiveConfirmationPixAndSendEmails {
             throw new AppError('Shop not found')
         }
 
-        const { data } = await axios.get('http://localhost:3334/instance/info?key=1')
+        const { data } = await axios.get(`${process.env.WHATSAPP_INSTANCE_URL}/instance/info?key=1`)
 
         item.paid = true
 
@@ -62,7 +62,7 @@ export class ReceiveConfirmationPixAndSendEmails {
         
             await this.seller.save(seller)
 
-            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: `55${seller.numberPhone}`,
                 message: `${item.client.name}, efetuou uma compra e por isso você acaba de ganhar ${points} na Zaycon. 😄`
             }) 
@@ -104,7 +104,7 @@ export class ReceiveConfirmationPixAndSendEmails {
         io.emit("receivePaimentAdmin") 
 
         try {
-            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: '5527999147896',
                 message: `${item.client.name} efetuou uma compra!`
             }) 
@@ -142,7 +142,7 @@ export class ReceiveConfirmationPixAndSendEmails {
         });
 
         try {
-            await axios.post(`http://localhost:3334/message/text?key=${data.instance_data.instance_key}`, {
+            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
                 id: `55${item.client.numberPhone}`,
                 message: `${item.client.name}, recebemos o seu pagamento! Assim que o status da sua compra alterar te informaremos pelo Whatsapp e Email.`
             }) 
