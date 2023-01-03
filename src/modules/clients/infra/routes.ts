@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Controller } from './Controller';
+import axios from 'axios';
 
 export const router = Router();
 const controller = new Controller();

@@ -19,25 +19,11 @@ export class UpdateStatus {
 
         const shop = await this.repository.getById(shopId);
 
-        const { data } = await axios.get(`${process.env.WHATSAPP_INSTANCE_URL}/instance/info?key=1`)
-
-        const phoneConnected = data.instance_data.phone_connected
-
-        if(!phoneConnected) {
-            throw new AppError('É necessário instanciar o whatsapp antes')
-        }
-
-
         if(!shop) {
             throw new AppError('Compra não localizada')
         }
 
          if(status === 'Preparando') {
-                await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
-                id: `55${shop.client.numberPhone}`,
-                message: `${shop.client.name}, já estamos preparando a sua compra e em poucos instantes ela será enviada...`
-            }) 
-
             const prepareShopEmailTemplate = path.resolve(
                 __dirname,
                 '..',
@@ -65,12 +51,6 @@ export class UpdateStatus {
         } 
 
         if(status === 'Enviado') {
-
-            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
-                id: `55${shop.client.numberPhone}`,
-                message: `${shop.client.name}, sua compra está a caminho!`
-            }) 
-
             const sendShopEmailTemplate = path.resolve(
                 __dirname,
                 '..',
@@ -98,12 +78,7 @@ export class UpdateStatus {
         } 
 
         if(status === 'Entregue') {
-
-            await axios.post(`${process.env.WHATSAPP_INSTANCE_URL}/message/text?key=${data.instance_data.instance_key}`, {
-                id: `55${shop.client.numberPhone}`,
-                message: `Muito obrigado por comprar com a gente, ${shop.client.name}. Esperamos te ver novamente 😉`
-            }) 
-
+            
             const finishShopEmailTemplate = path.resolve(
                 __dirname,
                 '..',
