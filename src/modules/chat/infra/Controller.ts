@@ -12,10 +12,10 @@ export class Controller {
     }
 
     async createAccount(request: Request, response: Response): Promise<Response> {
-        const teste = request.body;
+        const { entry } = request.body;
 
-        console.log(teste)
-        return teste;
+        console.log(entry)
+        return entry;
         // if (request.body.object) {
         //     if (
         //         request.body.entry &&
