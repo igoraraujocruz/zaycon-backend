@@ -7,7 +7,6 @@ import { contract as productContract } from '../../products/interfaces/contract'
 import path from 'path';
 import { AppError } from '../../../shared/AppError';
 import { io } from '../../../shared/http';
-import axios from 'axios';
 
 @injectable()
 export class ReceiveConfirmationPixAndSendEmails {

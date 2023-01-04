@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { Create } from '../services/Create';
 import { GetAll } from '../services/GetAll';
 
+
 export class Controller {
     async create(
         request: Request,
