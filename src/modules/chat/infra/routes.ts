@@ -6,9 +6,9 @@ import { Controller } from './Controller';
 export const router = Router();
 const controller = new Controller();
 
-router.get('/chat', controller.getChat)
+router.get('/', controller.getChat)
 
-router.post('/chat',
+router.post('/',
     celebrate({
         [Segments.BODY]: {
             name: Joi.string().required(),
