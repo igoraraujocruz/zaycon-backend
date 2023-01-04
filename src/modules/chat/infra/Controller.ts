@@ -26,7 +26,7 @@ export class Controller {
               const msg_body = request.body.entry[0].changes[0].value.messages[0].text.body;
 
               console.log(from, msg_body)
-              console.log(request.body.entry[0].changes[0])
+              console.log(request.body.entry[0].changes[0].value.contacts[0])
       
             //   io.emit("newMessage") 
 
