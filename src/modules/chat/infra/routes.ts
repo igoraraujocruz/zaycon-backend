@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Controller } from './Controller';
 import { io } from '../../../shared/http';
+import axios from 'axios';
 
 export const router = Router();
 const controller = new Controller();
@@ -25,6 +26,7 @@ router.get('/chatByAccount', celebrate({
 }), controller.getChatByAccount)
 
 router.get("/webhook", (req, res) => {
+
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
   let challenge = req.query["hub.challenge"];
@@ -56,22 +58,20 @@ router.post("/webhook", (req, res) => {
         let from = req.body.entry[0].changes[0].value.messages[0].from;
         let msg_body = req.body.entry[0].changes[0].value.messages[0].text.body;
 
-        io.emit("newMessage") 
-
-        // axios({
-        //   method: "POST",
-        //   url:
-        //     "https://graph.facebook.com/v12.0/" +
-        //     phone_number_id +
-        //     "/messages?access_token=" +
-        //     process.env.WHATSAPP_TOKEN,
-        //   data: {
-        //     messaging_product: "whatsapp",
-        //     to: from,
-        //     text: { body: "Ack: " + msg_body },
-        //   },
-        //   headers: { "Content-Type": "application/json" },
-        // });
+        axios({
+          method: "POST",
+          url:
+            "https://graph.facebook.com/v12.0/" +
+            phone_number_id +
+            "/messages?access_token=" +
+            process.env.WHATSAPP_TOKEN,
+          data: {
+            messaging_product: "whatsapp",
+            to: from,
+            text: { body: "Ack: " + msg_body },
+          },
+          headers: { "Content-Type": "application/json" },
+        });
       }
       res.sendStatus(200);
     } else {
