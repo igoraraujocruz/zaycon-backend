@@ -13,8 +13,10 @@ export class Controller {
 
     async createAccount(request: Request, response: Response): Promise<Response> {
         const { entry } = request.body;
+        const from = entry[0].changes[0].value.messages[0].from;
+        const msg_body = entry[0].changes[0].value.messages[0].text.body;
 
-        console.log(entry)
+        console.log(from, msg_body)
         return entry;
         // if (request.body.object) {
         //     if (
