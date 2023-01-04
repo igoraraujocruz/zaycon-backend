@@ -23,8 +23,6 @@ export class Controller {
               const from = request.body.entry[0].changes[0].value.messages[0].from;
               const msg_body = request.body.entry[0].changes[0].value.messages[0].text.body;
               const clientName = request.body.entry[0].changes[0].value.contacts[0].profile.name;
-      
-            //   io.emit("newMessage") 
 
               const findAccount = await Account.findOne({
                 numberPhone: from
@@ -48,6 +46,8 @@ export class Controller {
                 accountId: findAccount?._id,
                 message: msg_body
             })
+
+            io.emit("newMessage")
               
             return response.json(chat)
             }
