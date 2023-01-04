@@ -24,9 +24,10 @@ export class Controller {
               request.body.entry[0].changes[0].value.metadata.phone_number_id;
               const from = request.body.entry[0].changes[0].value.messages[0].from;
               const msg_body = request.body.entry[0].changes[0].value.messages[0].text.body;
+              const clientName = request.body.entry[0].changes[0].value.contacts[0].profile.name;
 
               console.log(from, msg_body)
-              console.log(request.body.entry[0].changes[0].value.contacts[0])
+              console.log(clientName)
       
             //   io.emit("newMessage") 
 
@@ -36,7 +37,7 @@ export class Controller {
     
             if (!findAccount) {
                 const account = await Account.create({
-                    name: 'Teste',
+                    name: clientName,
                     numberPhone: from,
                     plataform: 'Whatsapp',
                 })
