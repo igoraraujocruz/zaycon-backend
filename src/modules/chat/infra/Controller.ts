@@ -148,8 +148,27 @@ export class Controller {
 
             const message = body.entry[0].messaging[0].message.text
 
+            const findAccount = await Account.findOne({
+                numberPhone: recipient
+            })
+
+            if (!findAccount) {
+                const account = await Account.create({
+                    name: 'teste instagram' + recipient,
+                    numberPhone: recipient,
+                    plataform: 'Instagram',
+                })
+    
+                await Messages.create({
+                    accountId: account.numberPhone,
+                    message: message,
+                    isClient: true,
+                })
+        
+            }
+
             const chat = await Messages.create({
-                accountId: 'teste instagram' + recipient,
+                accountId: findAccount?.numberPhone,
                 message: message,
                 isClient: true,
             })
