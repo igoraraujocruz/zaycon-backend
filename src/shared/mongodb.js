@@ -4,7 +4,7 @@ require('dotenv/config');
 console.log(process.env.MONGODB_USER, process.env.MONGODB_PASS)
 
 mongoose.connect(
-  `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@localhost:27017`,
+  `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@0.0.0.0:27017`,
   {
     useNewUrlParser: true,
   }
