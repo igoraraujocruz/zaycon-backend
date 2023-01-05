@@ -144,6 +144,16 @@ export class Controller {
 
         console.log(body)
 
+        if (body.object === "instagram") {
+
+            const mensages = body.entry[0].messaging[0]
+
+            console.log(mensages)
+
+            response.status(200).send("EVENT_RECEIVED");
+
+        }
+
         if (body.object === "page") {
 
             response.status(200).send("EVENT_RECEIVED");
