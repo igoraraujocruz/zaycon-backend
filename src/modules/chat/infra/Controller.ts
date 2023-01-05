@@ -150,8 +150,6 @@ export class Controller {
 
             console.log(mensages)
 
-            response.status(200).send("EVENT_RECEIVED");
-
         }
 
         if (body.object === "page") {
