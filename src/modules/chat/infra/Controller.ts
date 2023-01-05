@@ -153,7 +153,7 @@ export class Controller {
             response.sendStatus(404);
           }
 
-        return response.json(body)
+        return response.json(200)
     }
 
     async verifyWebHook(request: Request, response: Response): Promise<Response> {
