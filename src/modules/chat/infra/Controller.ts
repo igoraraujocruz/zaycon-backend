@@ -138,7 +138,7 @@ export class Controller {
         return response.json(messages)
     }
 
-    async instagramWebHook(request: Request, response: Response) {
+    async instagramWebHook(request: Request, response: Response): Promise<Response> {
 
         const body = request.body;
 
@@ -169,6 +169,8 @@ export class Controller {
 
             response.sendStatus(404);
           }
+
+          return response.sendStatus(200)
     }
 
     async verifyWebHook(request: Request, response: Response) {
