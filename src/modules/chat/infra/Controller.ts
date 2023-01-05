@@ -142,13 +142,21 @@ export class Controller {
 
         const body = request.body;
 
-        console.log(body)
-
         if (body.object === "instagram") {
 
-            const mensages = body.entry[0].messaging[0]
+            const recipient = body.entry[0].messaging[0].recipient
 
-            console.log(mensages)
+            const message = body.entry[0].messaging[0].message.text
+
+            const chat = await Messages.create({
+                accountId: 'teste instagram' + recipient,
+                message: message,
+                isClient: true,
+            })
+
+
+            io.emit("newMessage")
+            return response.json(chat)
 
         }
 
