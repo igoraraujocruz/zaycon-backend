@@ -148,7 +148,11 @@ export class Controller {
 
             const recipient = body.entry[0].messaging[0].recipient
 
+            console.log(recipient)
+
             const message = body.entry[0].messaging[0].message.text
+
+            console.log(message)
 
             const chat = await Messages.create({
                 accountId: 'teste instagram' + recipient,
