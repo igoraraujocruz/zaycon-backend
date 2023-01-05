@@ -94,6 +94,9 @@ export class Controller {
               const clientName = request.body.entry[0].changes[0].value.contacts[0].profile.name;
 
               console.log('chegou aqui 1')
+              console.log(from)
+              console.log(msg_body)
+              console.log(clientName)
 
               try {
                 const findAccount = await Account.findOne({
