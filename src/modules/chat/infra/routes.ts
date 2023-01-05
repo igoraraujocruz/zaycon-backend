@@ -45,4 +45,8 @@ router.get("/webhook", (req, res) => {
 
 router.post("/webhook", controller.createAccount);
 
+router.post("/instagram/webhook", controller.instagramWebHook);
+
+router.get("/instagram/webhook", controller.verifyWebHook);
+
 

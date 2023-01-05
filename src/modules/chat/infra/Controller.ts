@@ -137,4 +137,43 @@ export class Controller {
 
         return response.json(messages)
     }
+
+    async instagramWebHook(request: Request, response: Response): Promise<Response> {
+
+        const body = request.body;
+
+        console.log(body)
+
+        if (body.object === "page") {
+
+            response.status(200).send("EVENT_RECEIVED");
+
+          } else {
+
+            response.sendStatus(404);
+          }
+
+        return response.json(body)
+    }
+
+    async verifyWebHook(request: Request, response: Response): Promise<Response> {
+
+        let mode = request.query["hub.mode"];
+        let token = request.query["hub.verify_token"];
+        let challenge = request.query["hub.challenge"];
+
+        if (mode && token) {
+
+            if (mode === "subscribe" && token === process.env.VERIFY_TOKEN) {
+   
+            console.log("WEBHOOK_VERIFIED");
+            response.status(200).send(challenge);
+            } else {
+
+            response.sendStatus(403);
+            }
+        }
+
+        return response.sendStatus(200)
+    }
 }
