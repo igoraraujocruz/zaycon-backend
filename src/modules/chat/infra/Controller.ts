@@ -94,41 +94,42 @@ export class Controller {
               const clientName = request.body.entry[0].changes[0].value.contacts[0].profile.name;
 
               console.log('chegou aqui 1')
-              const findAccount = await Account.findOne({
-                numberPhone: from
-            })
 
-            console.log('chegou aqui 2')
-            console.log(findAccount)
-    
-            if (!findAccount) {
-                const account = await Account.create({
-                    name: clientName,
-                    numberPhone: from,
-                    plataform: 'Whatsapp',
+              try {
+                const findAccount = await Account.findOne({
+                    numberPhone: from
                 })
+
+                if (!findAccount) {
+                    const account = await Account.create({
+                        name: clientName,
+                        numberPhone: from,
+                        plataform: 'Whatsapp',
+                    })
+        
+                    await Messages.create({
+                        accountId: account._id,
+                        message: msg_body,
+                        isClient: true,
+                    })
     
-                await Messages.create({
-                    accountId: account._id,
+                    console.log(account)
+            
+                }
+
+                const chat = await Messages.create({
+                    accountId: findAccount?._id,
                     message: msg_body,
                     isClient: true,
                 })
 
-                console.log(account)
-        
-            }
+                io.emit("newMessage")
 
-            const chat = await Messages.create({
-                accountId: findAccount?._id,
-                message: msg_body,
-                isClient: true,
-            })
-
-            console.log(chat)
-
-            io.emit("newMessage")
-              
-            return response.json(chat)
+                return response.json(chat)
+                
+              } catch(err) {
+                console.log(err)
+              }
             }
             response.sendStatus(200);
           } 
