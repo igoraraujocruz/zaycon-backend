@@ -144,6 +144,8 @@ export class Controller {
 
         if (body.object === "instagram") {
 
+            console.log(body)
+
             const recipient = body.entry[0].messaging[0].recipient
 
             const message = body.entry[0].messaging[0].message.text
