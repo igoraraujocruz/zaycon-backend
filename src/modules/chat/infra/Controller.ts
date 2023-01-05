@@ -138,11 +138,12 @@ export class Controller {
         return response.json(messages)
     }
 
-    async instagramWebHook(request: Request, response: Response): Promise<Response> {
+    async instagramWebHook(request: Request, response: Response) {
 
         const body = request.body;
-
-        console.log(body)
+        
+        console.log(`\u{1F7EA} Received webhook:`);
+        console.dir(body, { depth: null });
 
         if (body.object === "page") {
 
@@ -152,11 +153,9 @@ export class Controller {
 
             response.sendStatus(404);
           }
-
-        return response.json(200)
     }
 
-    async verifyWebHook(request: Request, response: Response): Promise<Response> {
+    async verifyWebHook(request: Request, response: Response) {
 
         let mode = request.query["hub.mode"];
         let token = request.query["hub.verify_token"];
@@ -173,7 +172,5 @@ export class Controller {
             response.sendStatus(403);
             }
         }
-
-        return response.sendStatus(200)
     }
 }
