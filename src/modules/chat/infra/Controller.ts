@@ -103,8 +103,6 @@ export class Controller {
                     numberPhone: from
                 })
 
-                console.log(findAccount)
-
                 if (!findAccount) {
                     const account = await Account.create({
                         name: clientName,

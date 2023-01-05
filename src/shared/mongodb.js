@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 require('dotenv/config');
 
+console.log(process.env.MONGODB_USER, process.env.MONGODB_PASS)
+
 mongoose.connect(
   `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@localhost:27017`,
   {
