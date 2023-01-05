@@ -93,10 +93,12 @@ export class Controller {
               const msg_body = request.body.entry[0].changes[0].value.messages[0].text.body;
               const clientName = request.body.entry[0].changes[0].value.contacts[0].profile.name;
 
+              console.log('chegou aqui 1')
               const findAccount = await Account.findOne({
                 numberPhone: from
             })
 
+            console.log('chegou aqui 2')
             console.log(findAccount)
     
             if (!findAccount) {
