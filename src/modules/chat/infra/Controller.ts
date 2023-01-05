@@ -141,9 +141,8 @@ export class Controller {
     async instagramWebHook(request: Request, response: Response) {
 
         const body = request.body;
-        
-        console.log(`\u{1F7EA} Received webhook:`);
-        console.dir(body, { depth: null });
+
+        console.log(body)
 
         if (body.object === "page") {
 
