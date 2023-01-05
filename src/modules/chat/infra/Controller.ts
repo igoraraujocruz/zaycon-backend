@@ -96,6 +96,8 @@ export class Controller {
               const findAccount = await Account.findOne({
                 numberPhone: from
             })
+
+            console.log(findAccount)
     
             if (!findAccount) {
                 const account = await Account.create({
@@ -109,6 +111,8 @@ export class Controller {
                     message: msg_body,
                     isClient: true,
                 })
+
+                console.log(account)
         
             }
 
@@ -117,6 +121,8 @@ export class Controller {
                 message: msg_body,
                 isClient: true,
             })
+
+            console.log(chat)
 
             io.emit("newMessage")
               
@@ -138,7 +144,7 @@ export class Controller {
         return response.json(messages)
     }
 
-    async instagramWebHook(request: Request, response: Response): Promise<Response> {
+    async instagramWebHook(request: Request, response: Response) {
 
         const body = request.body;
 
@@ -188,8 +194,6 @@ export class Controller {
 
             response.sendStatus(404);
           }
-
-          return response.sendStatus(200)
     }
 
     async verifyWebHook(request: Request, response: Response) {
