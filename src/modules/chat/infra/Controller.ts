@@ -146,7 +146,7 @@ export class Controller {
 
             console.log(body)
 
-            const recipient = body.entry[0].messaging[0].recipient
+            const recipient = body.entry[0].messaging[0].recipient.id
 
             console.log(recipient)
 
