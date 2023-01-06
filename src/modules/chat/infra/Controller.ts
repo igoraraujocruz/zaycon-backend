@@ -166,7 +166,6 @@ export class Controller {
 
             if (!findAccount) {
                 const account = await Account.create({
-                    id: recipient,
                     name: 'teste instagram' + recipient,
                     numberPhone: recipient,
                     plataform: 'Instagram',
