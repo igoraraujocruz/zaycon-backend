@@ -170,46 +170,48 @@ export class Controller {
                     message: message,
                     isClient: false,
                 })
-            }            
-
-            const findAccount = await Account.findOne({
-                referencePoint: recipient
-            })
-
-            if (!findAccount) {
-                const account = await Account.create({
-                    name: `Instagram ${recipient}`,
-                    referencePoint: recipient,
-                    platform: 'Instagram',
+            } else {
+                const findAccount = await Account.findOne({
+                    referencePoint: recipient
                 })
     
-                await Messages.create({
-                    accountId: account._id,
+                if (!findAccount) {
+                    const account = await Account.create({
+                        name: `Instagram ${recipient}`,
+                        referencePoint: recipient,
+                        platform: 'Instagram',
+                    })
+        
+                    await Messages.create({
+                        accountId: account._id,
+                        message: message,
+                        isClient: true,
+                    })
+            
+                }
+    
+                const chat = await Messages.create({
+                    accountId: findAccount?._id,
                     message: message,
                     isClient: true,
                 })
-        
+    
+                io.emit("newMessage")
+                return response.json(chat)
+    
             }
+    
+            if (body.object === "page") {
+    
+                response.status(200).send("EVENT_RECEIVED");
+    
+              } else {
+    
+                response.sendStatus(404);
+              }
+            }            
 
-            const chat = await Messages.create({
-                accountId: findAccount?._id,
-                message: message,
-                isClient: true,
-            })
-
-            io.emit("newMessage")
-            return response.json(chat)
-
-        }
-
-        if (body.object === "page") {
-
-            response.status(200).send("EVENT_RECEIVED");
-
-          } else {
-
-            response.sendStatus(404);
-          }
+            
     }
 
     async verifyWebHook(request: Request, response: Response) {
