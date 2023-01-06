@@ -164,6 +164,8 @@ export class Controller {
                 const findAccount = await Account.findOne({
                     referencePoint: recipient
                 })
+
+                console.log(findAccount)
     
                 await Messages.create({
                     accountId: findAccount?._id,
