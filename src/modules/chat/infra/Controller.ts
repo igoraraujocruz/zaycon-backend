@@ -46,7 +46,7 @@ export class Controller {
         return response.json(chat)
     }
 
-    async createAccount(request: Request, response: Response): Promise<Response> {
+    async createAccount(request: Request, response: Response) {
 
         const { referencePoint } = request.body;
 
@@ -133,9 +133,7 @@ export class Controller {
                 console.log(err)
               }
             }
-            response.sendStatus(200);
           } 
-          return response.sendStatus(200)
     }
 
     async getChatByAccount(request: Request, response: Response): Promise<Response> {
