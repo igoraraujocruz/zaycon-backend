@@ -162,7 +162,7 @@ export class Controller {
             if(senderId === process.env.SENDER_ID_INSTAGRAM) {
 
                 const findAccount = await Account.findOne({
-                    referencePoint: senderId
+                    referencePoint: recipient
                 })
     
                 await Messages.create({
