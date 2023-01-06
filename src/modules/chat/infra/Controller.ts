@@ -151,8 +151,6 @@ export class Controller {
 
         if (body.object === "instagram") {
 
-            console.log(body.entry[0].messaging[0])
-
             const recipient = body.entry[0].messaging[0].recipient.id
 
             const message = body.entry[0].messaging[0].message.text
@@ -193,17 +191,16 @@ export class Controller {
                         isClient: true,
                     })
             
-                }
-    
-                const chat = await Messages.create({
-                    accountId: findAccount?._id,
-                    message: message,
-                    isClient: true,
-                })
-    
-                io.emit("newMessage")
-                return response.json(chat)
-    
+                } else {
+                    const chat = await Messages.create({
+                        accountId: findAccount?._id,
+                        message: message,
+                        isClient: true,
+                    })
+        
+                    io.emit("newMessage")
+                    return response.json(chat)
+                }    
             }
     
             if (body.object === "page") {
