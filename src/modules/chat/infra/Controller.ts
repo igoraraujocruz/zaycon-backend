@@ -153,6 +153,8 @@ export class Controller {
 
         const body = request.body;
 
+        console.log(body)
+
         if (body.object === "instagram") {
 
             const recipient = body.entry[0].messaging[0].recipient.id
