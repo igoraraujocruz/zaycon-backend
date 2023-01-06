@@ -191,6 +191,7 @@ export class Controller {
                         isClient: true,
                     })
             
+                    io.emit("newMessage")
                 } else {
                     const chat = await Messages.create({
                         accountId: findAccount?._id,
