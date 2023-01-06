@@ -12,6 +12,40 @@ export class Controller {
         return response.json(account)
     }
 
+
+//retirar depois
+    async teste(request: Request, response: Response): Promise<Response> {
+
+        const { name, platform, referencePoint, message } = request.body;
+
+        const numberPhoneFormated = referencePoint.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
+
+        const findAccount = await Account.findOne({
+            referencePoint: numberPhoneFormated
+        })
+
+        if (!findAccount) {
+            const account = await Account.create({
+                name,
+                referencePoint:numberPhoneFormated,
+                platform,
+            })
+
+            await Messages.create({
+                accountId: account._id,
+                message
+            })
+    
+        }
+
+        const chat = await Messages.create({
+            accountId: findAccount?._id,
+            message
+        })
+
+        return response.json(chat)
+    }
+
     async createAccount(request: Request, response: Response): Promise<Response> {
 
         const { referencePoint } = request.body;
@@ -114,6 +148,48 @@ export class Controller {
     async instagramWebHook(request: Request, response: Response) {
 
         const body = request.body;
+
+        const { referencePoint } = request.body;
+
+            if(referencePoint) {
+
+                const findAccount = await Account.findOne({
+                    referencePoint
+                })
+                
+
+                if(findAccount) {
+                    await Messages.create({
+                        accountId:findAccount._id,
+                        message: request.body.message,
+                        isClient: false,
+                    })
+
+                    try {
+                        await axios({
+                            method: "POST",
+                            url:
+                                "https://graph.facebook.com/v15.0/PAGE-ID/messages",
+                            data: {
+                                access_token: process.env.INSTAGRAM_TOKEN,
+                                recipient: {
+                                    id: findAccount.referencePoint
+                                },
+                                message: { text: request.body.message },
+                            },
+                            headers: { "Content-Type": "application/json" },
+                        });
+    
+                        io.emit("newMessage")
+
+                        return  response.status(200).json("Mensagem Enviada");
+                    } catch(err) {
+                        console.log(err)
+                    }
+                    
+                }
+
+            }
 
         if (body.object === "instagram") {
 

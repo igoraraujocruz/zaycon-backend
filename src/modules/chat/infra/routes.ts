@@ -8,6 +8,17 @@ const controller = new Controller();
 
 router.get('/', controller.getChat)
 
+//retirar depois
+router.post('/',
+    celebrate({
+        [Segments.BODY]: {
+            name: Joi.string().required(),
+            platform: Joi.string().required(),
+            message: Joi.string().required(),
+            referencePoint: Joi.string().required()
+        },
+    }), controller.teste)
+
 router.get('/chatByAccount', celebrate({
     [Segments.QUERY]: {
         account: Joi.string().required(),
