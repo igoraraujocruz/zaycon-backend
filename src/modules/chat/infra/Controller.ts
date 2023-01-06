@@ -46,7 +46,7 @@ export class Controller {
         return response.json(chat)
     }
 
-    async createAccount(request: Request, response: Response) {
+    async createAccount(request: Request, response: Response): Promise<Response> {
 
         const { referencePoint } = request.body;
 
@@ -101,7 +101,6 @@ export class Controller {
                 })
 
                 if (!findAccount) {
-                    console.log('passou aqui')
                     const account = await Account.create({
                         name: clientName,
                         referencePoint: from,
@@ -116,8 +115,6 @@ export class Controller {
             
                     io.emit("newMessage")
                 } else {
-
-                    console.log('e aqui')
                     const chat = await Messages.create({
                         accountId: findAccount?._id,
                         message: msg_body,
@@ -133,7 +130,9 @@ export class Controller {
                 console.log(err)
               }
             }
+            response.sendStatus(200);
           } 
+          return response.sendStatus(200)
     }
 
     async getChatByAccount(request: Request, response: Response): Promise<Response> {
