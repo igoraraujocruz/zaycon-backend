@@ -149,49 +149,9 @@ export class Controller {
 
         const body = request.body;
 
-        const { referencePoint } = request.body;
-
-            if(referencePoint) {
-
-                const findAccount = await Account.findOne({
-                    referencePoint
-                })
-                
-
-                if(findAccount) {
-                    await Messages.create({
-                        accountId:findAccount._id,
-                        message: request.body.message,
-                        isClient: false,
-                    })
-
-                    try {
-                        await axios({
-                            method: "POST",
-                            url:
-                                "https://graph.facebook.com/v15.0/PAGE-ID/messages",
-                            data: {
-                                access_token: process.env.INSTAGRAM_TOKEN,
-                                recipient: {
-                                    id: findAccount.referencePoint
-                                },
-                                message: { text: request.body.message },
-                            },
-                            headers: { "Content-Type": "application/json" },
-                        });
-    
-                        io.emit("newMessage")
-
-                        return  response.status(200).json("Mensagem Enviada");
-                    } catch(err) {
-                        console.log(err)
-                    }
-                    
-                }
-
-            }
-
         if (body.object === "instagram") {
+
+            console.log(body.entry[0].messaging[0])
 
             const recipient = body.entry[0].messaging[0].recipient.id
 
