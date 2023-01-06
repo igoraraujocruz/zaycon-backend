@@ -153,7 +153,9 @@ export class Controller {
 
         const body = request.body;
 
-        console.log(body)
+        console.log(body.entry[0].messaging[0])
+
+
 
         if (body.object === "instagram") {
 
