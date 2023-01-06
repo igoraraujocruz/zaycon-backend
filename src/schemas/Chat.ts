@@ -1,13 +1,13 @@
 import { Schema, model, Document } from "mongoose";
 
 interface Account extends Document {
-    numberPhone: string;
+    referencePoint: string;
     name: string;
     plataform: string;
 }
 
 const AccountSchema = new Schema({
-    numberPhone: String,
+    referencePoint: String,
     name: String,
     plataform: String
 }, {

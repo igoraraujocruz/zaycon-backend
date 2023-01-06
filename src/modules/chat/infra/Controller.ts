@@ -51,7 +51,7 @@ export class Controller {
         if(numberPhone) {
 
             const findAccount = await Account.findOne({
-                numberPhone
+                referencePoint: numberPhone
             })
 
             if(findAccount) {
@@ -70,7 +70,7 @@ export class Controller {
                         process.env.WHATSAPP_TOKEN,
                     data: {
                         messaging_product: "whatsapp",
-                        to: findAccount.numberPhone,
+                        to: findAccount.referencePoint,
                         text: { body: request.body.message },
                     },
                     headers: { "Content-Type": "application/json" },
@@ -95,13 +95,13 @@ export class Controller {
 
               try {
                 const findAccount = await Account.findOne({
-                    numberPhone: from
+                    referencePoint: from
                 })
 
                 if (!findAccount) {
                     const account = await Account.create({
                         name: clientName,
-                        numberPhone: from,
+                        referencePoint: from,
                         plataform: 'Whatsapp',
                     })
         
@@ -110,8 +110,6 @@ export class Controller {
                         message: msg_body,
                         isClient: true,
                     })
-    
-                    console.log(account)
             
                 }
 
@@ -151,25 +149,18 @@ export class Controller {
 
         if (body.object === "instagram") {
 
-
-            console.log(body)
-
-            console.log(body.entry[0])
-
-            console.log(body.entry[0].messaging[0])
-
             const recipient = body.entry[0].messaging[0].recipient.id
 
             const message = body.entry[0].messaging[0].message.text
 
             const findAccount = await Account.findOne({
-                numberPhone: recipient
+                referencePoint: recipient
             })
 
             if (!findAccount) {
                 const account = await Account.create({
-                    name: 'teste instagram' + recipient,
-                    numberPhone: recipient,
+                    name: `Instagram ${recipient}`,
+                    referencePoint: recipient,
                     plataform: 'Instagram',
                 })
     
@@ -186,8 +177,6 @@ export class Controller {
                 message: message,
                 isClient: true,
             })
-
-            console.log(chat)
 
             io.emit("newMessage")
             return response.json(chat)
