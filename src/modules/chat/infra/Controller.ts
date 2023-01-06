@@ -93,11 +93,6 @@ export class Controller {
               const msg_body = request.body.entry[0].changes[0].value.messages[0].text.body;
               const clientName = request.body.entry[0].changes[0].value.contacts[0].profile.name;
 
-              console.log('chegou aqui 1')
-              console.log(from)
-              console.log(msg_body)
-              console.log(clientName)
-
               try {
                 const findAccount = await Account.findOne({
                     numberPhone: from
@@ -180,7 +175,7 @@ export class Controller {
             }
 
             const chat = await Messages.create({
-                accountId: findAccount?.numberPhone,
+                accountId: findAccount?._id,
                 message: message,
                 isClient: true,
             })
