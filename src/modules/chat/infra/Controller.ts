@@ -14,19 +14,19 @@ export class Controller {
 
     async teste(request: Request, response: Response): Promise<Response> {
 
-        const { name, plataform, numberPhone, message } = request.body;
+        const { name, platform, numberPhone, message } = request.body;
 
         const numberPhoneFormated = numberPhone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
 
         const findAccount = await Account.findOne({
-            numberPhone: numberPhoneFormated
+            referencePoint: numberPhoneFormated
         })
 
         if (!findAccount) {
             const account = await Account.create({
                 name,
-                numberPhone:numberPhoneFormated,
-                plataform,
+                referencePoint:numberPhoneFormated,
+                platform,
             })
 
             await Messages.create({
@@ -102,7 +102,7 @@ export class Controller {
                     const account = await Account.create({
                         name: clientName,
                         referencePoint: from,
-                        plataform: 'Whatsapp',
+                        platform: 'Whatsapp',
                     })
         
                     await Messages.create({
@@ -161,7 +161,7 @@ export class Controller {
                 const account = await Account.create({
                     name: `Instagram ${recipient}`,
                     referencePoint: recipient,
-                    plataform: 'Instagram',
+                    platform: 'Instagram',
                 })
     
                 await Messages.create({

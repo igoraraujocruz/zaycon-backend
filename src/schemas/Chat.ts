@@ -3,13 +3,13 @@ import { Schema, model, Document } from "mongoose";
 interface Account extends Document {
     referencePoint: string;
     name: string;
-    plataform: string;
+    platform: string;
 }
 
 const AccountSchema = new Schema({
     referencePoint: String,
     name: String,
-    plataform: String
+    platform: String
 }, {
     timestamps: true
 })
