@@ -172,13 +172,13 @@ export class Controller {
                 })
             } else {
                 const findAccount = await Account.findOne({
-                    referencePoint: recipient
+                    referencePoint: senderId
                 })
     
                 if (!findAccount) {
                     const account = await Account.create({
-                        name: `Instagram ${recipient}`,
-                        referencePoint: recipient,
+                        name: `Instagram ${senderId}`,
+                        referencePoint: senderId,
                         platform: 'Instagram',
                     })
         
