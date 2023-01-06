@@ -8,16 +8,6 @@ const controller = new Controller();
 
 router.get('/', controller.getChat)
 
-router.post('/',
-    celebrate({
-        [Segments.BODY]: {
-            name: Joi.string().required(),
-            plataform: Joi.string().required(),
-            message: Joi.string().required(),
-            numberPhone: Joi.string().regex(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/).required()
-        },
-    }), controller.teste)
-
 router.get('/chatByAccount', celebrate({
     [Segments.QUERY]: {
         account: Joi.string().required(),

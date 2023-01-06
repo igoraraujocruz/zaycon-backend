@@ -12,38 +12,6 @@ export class Controller {
         return response.json(account)
     }
 
-    async teste(request: Request, response: Response): Promise<Response> {
-
-        const { name, platform, numberPhone, message } = request.body;
-
-        const numberPhoneFormated = numberPhone.replace('(', '').replace(')', '').replace(' ', '').replace('-', '')
-
-        const findAccount = await Account.findOne({
-            referencePoint: numberPhoneFormated
-        })
-
-        if (!findAccount) {
-            const account = await Account.create({
-                name,
-                referencePoint:numberPhoneFormated,
-                platform,
-            })
-
-            await Messages.create({
-                accountId: account._id,
-                message
-            })
-    
-        }
-
-        const chat = await Messages.create({
-            accountId: findAccount?._id,
-            message
-        })
-
-        return response.json(chat)
-    }
-
     async createAccount(request: Request, response: Response): Promise<Response> {
 
         const { referencePoint } = request.body;
