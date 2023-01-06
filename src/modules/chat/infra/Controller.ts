@@ -167,7 +167,7 @@ export class Controller {
                 })
     
                 await Messages.create({
-                    accountId: account.numberPhone,
+                    accountId: account._id,
                     message: message,
                     isClient: true,
                 })
