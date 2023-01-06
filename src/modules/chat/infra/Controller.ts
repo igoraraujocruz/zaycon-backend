@@ -101,6 +101,7 @@ export class Controller {
                 })
 
                 if (!findAccount) {
+                    console.log('passou aqui')
                     const account = await Account.create({
                         name: clientName,
                         referencePoint: from,
@@ -115,6 +116,8 @@ export class Controller {
             
                     io.emit("newMessage")
                 } else {
+
+                    console.log('e aqui')
                     const chat = await Messages.create({
                         accountId: findAccount?._id,
                         message: msg_body,
