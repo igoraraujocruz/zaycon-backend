@@ -113,18 +113,19 @@ export class Controller {
                         isClient: true,
                     })
             
+                    io.emit("newMessage")
+                } else {
+                    const chat = await Messages.create({
+                        accountId: findAccount?._id,
+                        message: msg_body,
+                        isClient: true,
+                    })
+    
+                    io.emit("newMessage")
+    
+                    return response.json(chat)
                 }
 
-                const chat = await Messages.create({
-                    accountId: findAccount?._id,
-                    message: msg_body,
-                    isClient: true,
-                })
-
-                io.emit("newMessage")
-
-                return response.json(chat)
-                
               } catch(err) {
                 console.log(err)
               }
