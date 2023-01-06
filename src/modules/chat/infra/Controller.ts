@@ -46,12 +46,12 @@ export class Controller {
 
     async createAccount(request: Request, response: Response): Promise<Response> {
 
-        const { numberPhone } = request.body;
+        const { referencePoint } = request.body;
 
-        if(numberPhone) {
+        if(referencePoint) {
 
             const findAccount = await Account.findOne({
-                referencePoint: numberPhone
+                referencePoint
             })
 
             if(findAccount) {
