@@ -165,15 +165,15 @@ export class Controller {
                     referencePoint: recipient
                 })
 
-                if(findAccount) {
-                    console.log(findAccount)
-    
+                if(findAccount) {    
                 await Messages.create({
                         accountId: findAccount._id,
                         message: message,
                         isClient: false,
                     })
                 }
+
+                io.emit("newMessage")
 
             } else {
                 const findAccount = await Account.findOne({
