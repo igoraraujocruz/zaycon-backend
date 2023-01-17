@@ -72,14 +72,6 @@ export class Controller {
             throw new AppError('ShopId não encontrado')
         }
 
-        const priceOfProducts = items.order.reduce((prev, curr) => {
-            return prev + curr.product.price * curr.quantity
-        }, 0)
-
-        const taxeGerencianet = Number((priceOfProducts*1.19/100).toFixed(2))
-
-        const totalPrice = priceOfProducts + taxeGerencianet
-
         setTimeout(async () => {
             try {
                 const getById = container.resolve(GetById);
@@ -94,15 +86,11 @@ export class Controller {
                     return prev + curr.product.price * curr.quantity
                 }, 0)
 
-                const taxeGerencianet = Number((contraProva*1.19/100).toFixed(2))
+                const taxeGerencianet = Number((contraProva * 1.19/100).toFixed(2))
 
                 const totalPriceContraProva = contraProva + taxeGerencianet
 
-                if(totalPrice != totalPriceContraProva) {
-                    throw new AppError('Valores divergentes')
-                }
-
-                const pix = await gerarPix(contraProva, shopId)
+                const pix = await gerarPix(totalPriceContraProva, shopId)
 
                 const txid = pix.cobranca.data.txid
 

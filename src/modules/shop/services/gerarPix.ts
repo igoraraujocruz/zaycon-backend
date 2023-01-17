@@ -34,8 +34,8 @@ const cert = fs.readFileSync(
 
   export const gerarPix = async (totalPrice: number, shopId: string) => {
     const authResponse = await authenticate()
-    const { access_token } = authResponse.data;    
-
+    const { access_token } = authResponse.data;   
+    
     const reqGN = axios.create({
         baseURL: process.env.GN_ENDPOINT,
         httpsAgent: agent,

@@ -3,7 +3,6 @@ import 'reflect-metadata';
 import 'dotenv/config';
 import './container';
 import './connection';
-import './mongodb'
 import { isCelebrateError } from 'celebrate';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
