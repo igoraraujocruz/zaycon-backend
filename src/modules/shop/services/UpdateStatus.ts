@@ -4,7 +4,7 @@ import { Shop } from '../infra/Entity';
 import { contract } from '../interfaces/contract';
 import { IMailProvider } from '../../../shared/providers/MailProvider/models/IMailProvider';
 import path from 'path';
-import axios from 'axios';
+import { io } from '../../../shared/http';
 
 @injectable()
 export class UpdateStatus {
@@ -108,6 +108,8 @@ export class UpdateStatus {
         shop.status = status
 
         await this.repository.save(shop)
+
+        io.emit("changeStatus", {shopId: shop.id}) 
 
         return shop;
     }

@@ -24,7 +24,7 @@ export class Controller {
 
         const item = await create.execute({
             clientId, sellerId, typeOfPayment, socketId,
-            status: 'Aguardando Pagamento'
+            status: 'Aguardando Confirmação'
         });
 
         return response.status(200).json(item);

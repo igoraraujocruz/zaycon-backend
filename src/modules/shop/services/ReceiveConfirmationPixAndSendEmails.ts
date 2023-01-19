@@ -91,7 +91,7 @@ export class ReceiveConfirmationPixAndSendEmails {
             //no-error
         }        
 
-        io.to(item.socketId).emit("receivePaiment", {name: item.client.name}) 
+        io.to(item.socketId).emit("receivePaiment", {name: item.client.name, shopId: item.id}) 
 
         io.emit("receivePaimentAdmin") 
 
