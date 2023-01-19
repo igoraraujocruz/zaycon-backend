@@ -132,6 +132,9 @@ export class Controller {
     ): Promise<Response> {
         const { shopId, status } = request.body
 
+        console.log(shopId)
+        console.log(status)
+
         const updateStatus = container.resolve(
             UpdateStatus,
         );
