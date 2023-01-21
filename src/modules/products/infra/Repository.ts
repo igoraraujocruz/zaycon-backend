@@ -19,7 +19,9 @@ export class Repository implements contract {
     }
 
     async getAll(): Promise<Product[]> {
-        const items = this.ormRepository.find();
+        const items = this.ormRepository.find({
+            take: 5
+        });
 
         return items;
     }

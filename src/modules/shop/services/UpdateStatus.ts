@@ -17,11 +17,7 @@ export class UpdateStatus {
 
     async execute(shopId: string, status: string): Promise<Shop> {
 
-        console.log('chegou aqui')
-
         const shop = await this.repository.getById(shopId);
-
-        console.log(shop)
 
         if(!shop) {
             throw new AppError('Compra não localizada')
