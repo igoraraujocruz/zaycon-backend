@@ -86,7 +86,15 @@ export class Controller {
                     return prev + curr.product.price * curr.quantity
                 }, 0)
 
-                const taxeGerencianet = Number((contraProva * 1.19/100).toFixed(2))
+                let taxeGerencianet = Number((contraProva * 1.19/100).toFixed(3)) 
+                
+                const taxeToString = taxeGerencianet.toString()
+                
+                const lastNum = parseInt(taxeToString[taxeToString.length -1])
+
+                if(lastNum == 5) {
+                    taxeGerencianet += 0.01
+                }
 
                 const totalPriceContraProva = contraProva + taxeGerencianet
 
@@ -131,9 +139,6 @@ export class Controller {
         response: Response,
     ): Promise<Response> {
         const { shopId, status } = request.body
-
-        console.log(shopId)
-        console.log(status)
 
         const updateStatus = container.resolve(
             UpdateStatus,
