@@ -3,5 +3,9 @@ export interface create {
     cep: string;
     email: string;
     numberPhone: string;
-    address: string;
+    logradouro: string;
+    bairro: string;
+    localidade: string;
+    uf: string;
+    residenceNumber: string;
 }
