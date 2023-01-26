@@ -10,6 +10,7 @@ import { AppError } from '../../../shared/AppError';
 import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 import { UpdateStatus } from '../services/UpdateStatus';
+import { Client } from "@googlemaps/google-maps-services-js";
 
 export class Controller {
     async create(
@@ -81,35 +82,86 @@ export class Controller {
                 if(!shop) {
                     throw new AppError('ShopId não encontrado')
                 }
+
+                if(shop.client.cep === null) {
+                    const valueOfAllProducts = shop.order.reduce((prev, curr) => {
+                        return prev + curr.product.price * curr.quantity
+                    }, 0)
+    
+                    let taxeGerencianet = Number((valueOfAllProducts * 1.19/100).toFixed(3)) 
+                    
+                    const taxeToString = taxeGerencianet.toString()
+                    
+                    const lastNum = parseInt(taxeToString[taxeToString.length -1])
+    
+                    if(lastNum == 5) {
+                        taxeGerencianet += 0.01
+                    }
+    
+                    const totalPriceContraProva = valueOfAllProducts + taxeGerencianet
+    
+                    const pix = await gerarPix(totalPriceContraProva, shopId)
+    
+                    const txid = pix.cobranca.data.txid
+    
+                    const saveReferenceId = container.resolve(
+                        SaveReferenceId,
+                    );
+    
+                    await saveReferenceId.execute(txid, shop.id)
+            
+                    return response.status(200).json(pix.qrcode.data);
+                    
+                } else {
+                    const valueOfAllProducts = shop.order.reduce((prev, curr) => {
+                        return prev + curr.product.price * curr.quantity
+                    }, 0)
+
+                    const client = new Client({});
         
-                const contraProva = shop.order.reduce((prev, curr) => {
-                    return prev + curr.product.price * curr.quantity
-                }, 0)
+                    const getAddress = await client.distancematrix({
+                        params: {
+                            origins: [
+                                `${process.env.ENDERECO_DA_LOJA}`
+                            ],
+                            destinations: [
+                                `${shop.client.logradouro}, ${shop.client.residenceNumber} - ${shop.client.bairro}, ${shop.client.localidade} - ${shop.client.uf}, ${shop.client.cep}`
+                            ],
+                            key: `${process.env.GOOGLE_KEY}`
+                        }
+                    })
 
-                let taxeGerencianet = Number((contraProva * 1.19/100).toFixed(3)) 
-                
-                const taxeToString = taxeGerencianet.toString()
-                
-                const lastNum = parseInt(taxeToString[taxeToString.length -1])
+                    const addressComplete = getAddress.data.rows[0].elements[0].distance.value
 
-                if(lastNum == 5) {
-                    taxeGerencianet += 0.01
+                    const valueFrete = (addressComplete * Number(process.env.VALOR_FRETE_POR_METRO)).toFixed(2)
+
+                    const sumValueOfAllProductsAndValueFrete = valueOfAllProducts + Number(valueFrete);
+
+                    let taxeGerencianet = Number((sumValueOfAllProductsAndValueFrete * 1.19/100).toFixed(3)) 
+
+                    const taxeToString = taxeGerencianet.toString()
+                    
+                    const lastNum = parseInt(taxeToString[taxeToString.length -1])
+    
+                    if(lastNum == 5) {
+                        taxeGerencianet += 0.01
+                    }
+
+                    const totalPriceContraProva = sumValueOfAllProductsAndValueFrete + taxeGerencianet
+    
+                    const pix = await gerarPix(totalPriceContraProva, shopId)
+    
+                    const txid = pix.cobranca.data.txid
+    
+                    const saveReferenceId = container.resolve(
+                        SaveReferenceId,
+                    );
+    
+                    await saveReferenceId.execute(txid, shop.id)
+            
+                    return response.status(200).json(pix.qrcode.data);
                 }
 
-                const totalPriceContraProva = contraProva + taxeGerencianet
-
-                const pix = await gerarPix(totalPriceContraProva, shopId)
-
-                const txid = pix.cobranca.data.txid
-
-                const saveReferenceId = container.resolve(
-                    SaveReferenceId,
-                );
-
-                await saveReferenceId.execute(txid, shop.id)
-        
-                return response.status(200).json(pix.qrcode.data);
-                
             } catch(err) {
                 console.log(err)
             }

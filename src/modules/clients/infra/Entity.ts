@@ -20,7 +20,19 @@ export class Client {
     name: string;
 
     @Column()
-    address: string;
+    logradouro: string;
+
+    @Column()
+    bairro: string;
+
+    @Column()
+    localidade: string;
+
+    @Column()
+    uf: string;
+
+    @Column()
+    residenceNumber: string;
 
     @Column()
     cep: string;
