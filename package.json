@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.3.26",
+    "@sentry/node": "^7.34.0",
+    "@sentry/tracing": "^7.34.0",
     "@types/uuid": "^8.3.4",
     "aws-sdk": "^2.1260.0",
     "axios": "^1.2.0",
