@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Controller } from './Controller';
 import { ensureAuthenticated } from './Middlewarer';
+import { ensureSellerIsAdmin } from '../../shop/infra/Middlewarer';
 
 export const router = Router();
 const controller = new Controller();
@@ -58,7 +59,7 @@ router.post(
     controller.resetPassword,
 );
 
-router.get('/', celebrate({
+router.get('/', ensureAuthenticated, ensureSellerIsAdmin, celebrate({
     [Segments.QUERY]: {
         sellerName: Joi.string(),
         sellerUsername: Joi.string(),
