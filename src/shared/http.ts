@@ -12,8 +12,10 @@ import uploadConfig from '../config/upload'
 import cors from 'cors';
 import http from 'http'
 import { Server } from 'socket.io';
+import { rateLimiter } from './rateLimiter';
 
 const app = express()
+app.use(rateLimiter)
 
 app.use(express.json())
 app.use('/photos', express.static(uploadConfig.uploadsFolder));
