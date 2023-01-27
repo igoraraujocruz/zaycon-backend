@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import { Controller } from './Controller';
+import { ensureAuthenticated } from '../../sellers/infra/Middlewarer';
+import { ensureSellerIsAdmin } from '../../shop/infra/Middlewarer';
 
 
 export const router = Router();
@@ -24,7 +26,7 @@ router.post(
     controller.create,
 );
 
-router.get('/', controller.getAll)
+router.get('/', ensureAuthenticated, ensureSellerIsAdmin, controller.getAll)
 
 router.post('/address', celebrate({
     [Segments.BODY]: {

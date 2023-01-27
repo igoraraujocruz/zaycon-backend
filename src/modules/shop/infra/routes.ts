@@ -18,7 +18,6 @@ router.post(
                 .required()
                 .valid(
                     'pix',
-                    'picpay',
                 ),
         },
     }),
@@ -52,6 +51,8 @@ celebrate({
         shopId: Joi.string().uuid(),
     },
 }),
+ensureAuthenticated,
+ensureSellerIsAdmin,
 controller.get)
 
 router.patch('/', celebrate({
