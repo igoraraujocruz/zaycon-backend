@@ -12,7 +12,7 @@ import uploadConfig from '../config/upload'
 import cors from 'cors';
 import http from 'http'
 import { Server } from 'socket.io';
-import { rateLimiter } from './rateLimiter';
+import rateLimiter from './rateLimiter';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
