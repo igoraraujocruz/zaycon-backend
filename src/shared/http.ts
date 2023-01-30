@@ -17,7 +17,7 @@ import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
 const app = express()
-app.use(rateLimiter)
+//app.use(rateLimiter)
 
 Sentry.init({
     dsn: process.env.SENTRY_DSN,
