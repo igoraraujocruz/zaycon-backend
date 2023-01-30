@@ -11,6 +11,7 @@ import {
 import { Exclude } from 'class-transformer';
 import { Photo } from '../../photos/infra/Entity';
 import { Order } from '../../orders/infra/Entity';
+import { SellerOrders } from '../../sellerOrders/infra/Entity';
 
 @Entity('products')
 export class Product {
@@ -45,6 +46,9 @@ export class Product {
         eager: true,
     })
     photos: Photo[];
+
+    @OneToMany(() => SellerOrders, sellerOrders => sellerOrders.product)
+    sellerOrders: SellerOrders[];
 
     @OneToOne(() => Order, order => order.product)
     order: Order[];

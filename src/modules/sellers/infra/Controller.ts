@@ -10,6 +10,7 @@ import { ConfirmEmail } from '../services/ConfirmEmail';
 import { ReceiveConfirmationEmail } from '../services/ReceiveConfirmationEmail';
 import { SendForgotPasswordEmailService } from '../services/SendForgotPasswordEmail';
 import { ResetPassword } from '../services/ResetPassword';
+import { GetBySellerId } from '../services/GetBySellerId';
 
 export class Controller {
     async create(
@@ -36,7 +37,7 @@ export class Controller {
 
     async get(request: Request, response: Response): Promise<Response> {
 
-        const { sellerName, sellerUsername } = request.query;
+        const { sellerName, sellerUsername, sellerId } = request.query;
 
         if (sellerName) {
             const get = container.resolve(GetBySellerName);
@@ -50,6 +51,14 @@ export class Controller {
             const get = container.resolve(GetBySellerUsername);
 
             const seller = await get.execute(String(sellerUsername));
+
+            return response.json(instanceToPlain(seller));
+        }
+
+        if (sellerId) {
+            const get = container.resolve(GetBySellerId);
+
+            const seller = await get.execute(String(sellerId));
 
             return response.json(instanceToPlain(seller));
         }

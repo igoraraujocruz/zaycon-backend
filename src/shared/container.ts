@@ -23,6 +23,9 @@ import { Repository as photoRepository } from '../modules/photos/infra/Repositor
 import { contract as orderContract } from '../modules/orders/interfaces/contract';
 import { Repository as orderRepository } from '../modules/orders/infra/Repository';
 
+import { contract as sellerOrdersContract } from '../modules/sellerOrders/interfaces/contract';
+import { Repository as sellerOrdersRepository } from '../modules/sellerOrders/infra/Repository';
+
 
 container.registerSingleton<sellerContract>(
     'Seller',
@@ -57,4 +60,9 @@ container.registerSingleton<photoContract>(
 container.registerSingleton<orderContract>(
     'Order',
     orderRepository,
+);
+
+container.registerSingleton<sellerOrdersContract>(
+    'SellerOrders',
+    sellerOrdersRepository,
 );

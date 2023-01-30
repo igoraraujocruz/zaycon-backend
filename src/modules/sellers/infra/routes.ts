@@ -63,6 +63,7 @@ router.get('/', ensureAuthenticated, ensureSellerIsAdmin, celebrate({
     [Segments.QUERY]: {
         sellerName: Joi.string(),
         sellerUsername: Joi.string(),
+        sellerId: Joi.string(),
     },
 }), controller.get)
 

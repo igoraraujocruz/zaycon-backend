@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Shop } from '../../shop/infra/Entity';
+import { SellerOrders } from '../../sellerOrders/infra/Entity';
 
 @Entity('sellers')
 export class Seller {
@@ -47,6 +48,11 @@ export class Seller {
         eager: true
     })
     shop: Shop[];
+
+    @OneToMany(() => SellerOrders, sellerOrders => sellerOrders.seller, {
+        eager: true
+    })
+    sellerOrders: SellerOrders[];
 
     @CreateDateColumn()
     createdAt: Date;

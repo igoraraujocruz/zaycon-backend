@@ -117,7 +117,6 @@ export class ReceiveConfirmationPixAndSendEmails {
                 file: confirmationAdminShopTemplate,
                 variables: {
                     nameClient: item.client.name,
-                    addressClient: item.client.address,
                     cepClient: item.client.cep,
                     emailClient: item.client.email,
                     numberPhoneClient: item.client.numberPhone
