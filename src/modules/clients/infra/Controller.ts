@@ -54,8 +54,18 @@ export class Controller {
 
         const addressComplete = getAddress.data.rows[0].elements[0].distance.value
 
-        const valueFrete = (addressComplete * Number(process.env.VALOR_FRETE_POR_METRO)).toFixed(2)
+        switch (address.localidade) {
+            case 'Vitória':
+                return response.status(200).json(15)
+            
+            case 'Vila Velha':
+                return response.status(200).json(20)
 
-        return response.status(200).json(valueFrete)
+            case 'Serra':
+            case 'Cariacica':    
+                return response.status(200).json(30)
+            default:
+                return response.status(200).json(-1)
+        }
     }
 }

@@ -10,7 +10,6 @@ import { AppError } from '../../../shared/AppError';
 import { SaveReferenceId } from '../services/SaveReferenceId';
 import { ReceiveConfirmationPixAndSendEmails } from '../services/ReceiveConfirmationPixAndSendEmails';
 import { UpdateStatus } from '../services/UpdateStatus';
-import { Client } from "@googlemaps/google-maps-services-js";
 
 export class Controller {
     async create(
@@ -117,30 +116,13 @@ export class Controller {
                         return prev + curr.product.price * curr.quantity
                     }, 0)
 
-                    const client = new Client({});
-        
-                    const getAddress = await client.distancematrix({
-                        params: {
-                            origins: [
-                                `${process.env.ENDERECO_DA_LOJA}`
-                            ],
-                            destinations: [
-                                `${shop.client.logradouro}, ${shop.client.residenceNumber} - ${shop.client.bairro}, ${shop.client.localidade} - ${shop.client.uf}, ${shop.client.cep}`
-                            ],
-                            key: `${process.env.GOOGLE_KEY}`
-                        }
-                    })
+                   if (shop.client.localidade === 'Vitória') {
+                    const sumValueOfAllProductsAndValueFrete = valueOfAllProducts + 15;
 
-                    const addressComplete = getAddress.data.rows[0].elements[0].distance.value
-
-                    const valueFrete = (addressComplete * Number(process.env.VALOR_FRETE_POR_METRO)).toFixed(2)
-
-                    const sumValueOfAllProductsAndValueFrete = valueOfAllProducts + Number(valueFrete);
-
-                    let taxeGerencianet = Number((sumValueOfAllProductsAndValueFrete * 1.19/100).toFixed(3)) 
+                    let taxeGerencianet = Number((sumValueOfAllProductsAndValueFrete * 1.19/100).toFixed(3))
 
                     const taxeToString = taxeGerencianet.toString()
-                    
+                
                     const lastNum = parseInt(taxeToString[taxeToString.length -1])
     
                     if(lastNum == 5) {
@@ -148,18 +130,75 @@ export class Controller {
                     }
 
                     const totalPriceContraProva = sumValueOfAllProductsAndValueFrete + taxeGerencianet
-    
+
                     const pix = await gerarPix(totalPriceContraProva, shopId)
-    
+
                     const txid = pix.cobranca.data.txid
-    
+
                     const saveReferenceId = container.resolve(
                         SaveReferenceId,
                     );
-    
+
                     await saveReferenceId.execute(txid, shop.id)
-            
+        
                     return response.status(200).json(pix.qrcode.data);
+                   }
+
+                   if (shop.client.localidade === 'Vila Velha') {
+                    const sumValueOfAllProductsAndValueFrete = valueOfAllProducts + 20;
+
+                    let taxeGerencianet = Number((sumValueOfAllProductsAndValueFrete * 1.19/100).toFixed(3))
+
+                    const taxeToString = taxeGerencianet.toString()
+                
+                    const lastNum = parseInt(taxeToString[taxeToString.length -1])
+    
+                    if(lastNum == 5) {
+                        taxeGerencianet += 0.01
+                    }
+
+                    const totalPriceContraProva = sumValueOfAllProductsAndValueFrete + taxeGerencianet
+
+                    const pix = await gerarPix(totalPriceContraProva, shopId)
+
+                    const txid = pix.cobranca.data.txid
+
+                    const saveReferenceId = container.resolve(
+                        SaveReferenceId,
+                    );
+
+                    await saveReferenceId.execute(txid, shop.id)
+        
+                    return response.status(200).json(pix.qrcode.data);
+                   }
+
+                   if (shop.client.localidade === 'Cariacica' || shop.client.localidade === 'Serra') {
+                    const sumValueOfAllProductsAndValueFrete = valueOfAllProducts + 30;
+
+                    let taxeGerencianet = Number((sumValueOfAllProductsAndValueFrete * 1.19/100).toFixed(3))
+
+                    const taxeToString = taxeGerencianet.toString()
+                
+                    const lastNum = parseInt(taxeToString[taxeToString.length -1])
+    
+                    if(lastNum == 5) {
+                        taxeGerencianet += 0.01
+                    }
+
+                    const totalPriceContraProva = sumValueOfAllProductsAndValueFrete + taxeGerencianet
+
+                    const pix = await gerarPix(totalPriceContraProva, shopId)
+
+                    const txid = pix.cobranca.data.txid
+
+                    const saveReferenceId = container.resolve(
+                        SaveReferenceId,
+                    );
+
+                    await saveReferenceId.execute(txid, shop.id)
+        
+                    return response.status(200).json(pix.qrcode.data);
+                   }
                 }
 
             } catch(err) {
