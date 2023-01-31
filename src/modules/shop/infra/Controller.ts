@@ -216,6 +216,8 @@ export class Controller {
 
         const { txid } = request.body.pix[0]
 
+        console.log('controller')
+
         const receiveConfirmationPixAndSendEmails = container.resolve(
             ReceiveConfirmationPixAndSendEmails,
         );

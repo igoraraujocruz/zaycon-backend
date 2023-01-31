@@ -23,6 +23,8 @@ export class ReceiveConfirmationPixAndSendEmails {
 
     async execute(txid: string): Promise<Shop | undefined> {
 
+        console.log('service')
+
         const item = await this.repository.getByReferenceId(txid);
 
         if (!item) {
