@@ -37,14 +37,11 @@ router.post(
 
 router.post(
     '/gerencianet/webhook(/pix)?',
-    (req, res) => {
-        res.send(200)
-    }
-    // celebrate({
-    //     [Segments.BODY]: {
-    //         pix: Joi.array().required(),
-    //     },
-    // }), controller.receiveConfirmationPix   
+    celebrate({
+        [Segments.BODY]: {
+            pix: Joi.array().required(),
+        },
+    }), controller.receiveConfirmationPix   
 );
 
 router.get('/',
