@@ -31,12 +31,16 @@ export class Controller {
             }), 
         });
 
-        request.files.forEach(nome => {
-            uploadPhotos.execute({
-                name: nome.filename,
-                productId: product.id,
+        if(request.files) {
+            request.files.forEach(nome => {
+                uploadPhotos.execute({
+                    name: nome.filename,
+                    productId: product.id,
+                });
             });
-        });
+        }
+
+        
 
         return response.status(200).json(product);
     }
