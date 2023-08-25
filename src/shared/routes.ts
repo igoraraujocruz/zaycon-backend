@@ -7,6 +7,7 @@ import { router as shopRouter } from '../modules/shop/infra/routes';
 import { router as photoRouter } from '../modules/photos/infra/routes';
 import { router as orderRouter } from '../modules/orders/infra/routes';
 import { router as sellerOrdersRouter } from '../modules/sellerOrders/infra/routes';
+import { router as bannerRouter } from '../modules/banners/infra/routes';
 
 export const routes = Router();
 routes.use('/sellers', sellersRouter);
@@ -15,5 +16,6 @@ routes.use('/clients', clientsRouter);
 routes.use('/products', productsRouter);
 routes.use('/shop', shopRouter);
 routes.use('/photos', photoRouter);
+routes.use('/banners', bannerRouter);
 routes.use('/orders', orderRouter);
 routes.use('/sellerOrders', sellerOrdersRouter);

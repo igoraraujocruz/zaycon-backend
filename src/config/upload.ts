@@ -34,8 +34,9 @@ export default {
             filename(req, file, callback) {
                 const fileHash = crypto.randomBytes(10).toString('hex');
                 const fileName = `${fileHash}-${file.originalname}`;
+                const fileNameWithoutSpace = fileName.split(' ').join('_')
 
-                return callback(null, fileName);
+                return callback(null, fileNameWithoutSpace);
             },
         }),
         limits: {

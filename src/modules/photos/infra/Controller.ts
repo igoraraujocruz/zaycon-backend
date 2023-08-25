@@ -21,6 +21,7 @@ export class Controller {
 
         return response.status(200).json({ message: 'Upload image success' });
     }
+    
 
     async remove(
         request: Request,
