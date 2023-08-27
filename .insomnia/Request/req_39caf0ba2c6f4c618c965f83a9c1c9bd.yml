@@ -1,0 +1,35 @@
+_id: req_39caf0ba2c6f4c618c965f83a9c1c9bd
+type: Request
+parentId: fld_61368635284943b7844df35e88aeb85f
+modified: 1692931024234
+created: 1692922089403
+url: "{{ _.host }}/banners/teste2"
+name: Upload
+description: ""
+method: POST
+body:
+  mimeType: multipart/form-data
+  params:
+    - id: pair_8b3426e2081e4080b5589acb743f9009
+      name: banners
+      value: ""
+      description: ""
+      type: file
+      fileName: C:\Users\igora\Pictures\Screenshots\Captura de Tela (8).png
+parameters: []
+headers:
+  - name: Content-Type
+    value: multipart/form-data
+  - name: User-Agent
+    value: Insomnia/2023.5.3
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1692922089404
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

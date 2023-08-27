@@ -1,0 +1,30 @@
+_id: req_c2457ad2927445bfb80d383af26d1974
+type: Request
+parentId: fld_5102f91aa68a460eb8855dadbfda4091
+modified: 1674850823593
+created: 1674850602937
+url: "{{ _.host }}/orders"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"quantity": 5,
+    	"productId": "ff02d502-43ef-4f23-b623-d6704bf29cd8",
+    	"shopId": "eb7d998d-5eb7-429a-a186-c4ab281c543d"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674850602937
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

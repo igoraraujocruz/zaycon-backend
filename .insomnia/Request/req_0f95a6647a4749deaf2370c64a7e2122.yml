@@ -1,0 +1,33 @@
+_id: req_0f95a6647a4749deaf2370c64a7e2122
+type: Request
+parentId: fld_6cf2c192fbb040f4a2d2d1ab3d46aa85
+modified: 1692925341742
+created: 1674850882984
+url: "{{ _.host }}/photos/4d50d956-3266-49c1-bf41-652423b9311d"
+name: Upload
+description: ""
+method: POST
+body:
+  mimeType: multipart/form-data
+  params:
+    - id: pair_cd4d6bc1fccf4f7a8327209e2b2c36fd
+      name: photos
+      value: ""
+      description: ""
+      type: file
+      fileName: C:\Users\igora\Pictures\mouse2.jpg
+parameters: []
+headers:
+  - name: Content-Type
+    value: multipart/form-data
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1674850882984
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

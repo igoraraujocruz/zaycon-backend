@@ -1,0 +1,30 @@
+_id: req_46ed825965534ad8a06ad829c570cac4
+type: Request
+parentId: fld_62e083db7440430ca0f830b6175a331e
+modified: 1675175159660
+created: 1675173147178
+url: https://api-pix.gerencianet.com.br/v2/webhook/6ce28c90-733f-4643-b908-11a337720561
+name: Webhook
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"webhookUrl": "https://api.zaycon.shop/shop/gerencianet/webhook"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{ _.tokenGerencianet }}"
+metaSortKey: -1675173147178
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

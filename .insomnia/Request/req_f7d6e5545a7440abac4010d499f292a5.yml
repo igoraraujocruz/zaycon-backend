@@ -1,0 +1,37 @@
+_id: req_f7d6e5545a7440abac4010d499f292a5
+type: Request
+parentId: fld_e03d0f109048491d9fd21713001d40a5
+modified: 1674851438141
+created: 1674851270569
+url: "{{ _.host }}/products"
+name: Update
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"id": "ff02d502-43ef-4f23-b623-d6704bf29cd8",
+    	"name": "Igor",
+    	"description": "descrição",
+    	"price": 3.54,
+    	"points": 554,
+    	"amount": 252,
+    	"destaque": true,
+    	"category": "Informática"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1674851270569
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

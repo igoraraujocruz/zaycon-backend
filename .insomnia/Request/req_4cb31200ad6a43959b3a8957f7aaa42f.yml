@@ -1,0 +1,31 @@
+_id: req_4cb31200ad6a43959b3a8957f7aaa42f
+type: Request
+parentId: fld_d2b90ede62754f098ca55f3a472f27a2
+modified: 1674853650989
+created: 1674853481137
+url: "{{ _.host }}/shop/"
+name: Change Status
+description: ""
+method: PATCH
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"shopId": "eb7d998d-5eb7-429a-a186-c4ab281c543d",
+    	"status": "Preparando"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1674083502013
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

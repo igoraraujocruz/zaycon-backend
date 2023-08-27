@@ -1,0 +1,36 @@
+_id: req_c30324cde5584ffc94a3a2ba49ec2bde
+type: Request
+parentId: fld_61a42c454ba6440d878736d996351545
+modified: 1674850180843
+created: 1674750778531
+url: "{{ _.dev }}/clients"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name": "EAEAEA",
+    	"email": "doasdij@gjiaosd.com",
+    	"numberPhone": "(27) 99799-8645",
+    	"cep": "29032570",
+    	"logradouro": "Logradouro",
+    	"bairro": "bairro",
+    	"localidade": "localidade",
+    	"uf": "uf",
+    	"residenceNumber": "ResidenceNumber"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674750778531
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

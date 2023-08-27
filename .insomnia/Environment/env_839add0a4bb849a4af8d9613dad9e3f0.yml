@@ -1,0 +1,17 @@
+_id: env_839add0a4bb849a4af8d9613dad9e3f0
+type: Environment
+parentId: env_3c83933d3ad3f4ee03bfbe21fcb2c7ca6e2f79be
+modified: 1674255212839
+created: 1674255179623
+name: prod
+data:
+  host: http://api.zaycon.shop
+  token: "{% response 'body', 'req_805f8198c1374c199894b7c7b77f1005',
+    'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+dataPropertyOrder:
+  "&":
+    - host
+    - token
+color: "#ff0000"
+isPrivate: false
+metaSortKey: 1674255179623

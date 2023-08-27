@@ -1,0 +1,28 @@
+_id: req_a459fc3691364aca868b569b2e572663
+type: Request
+parentId: fld_d2b90ede62754f098ca55f3a472f27a2
+modified: 1674853095821
+created: 1674853024122
+url: "{{ _.host }}/shop/gerencianet"
+name: Create Charge (Criar cobrança na Gerencianet)
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"shopId": "4719217a-5407-43d3-b124-5202877be871"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674468309102
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

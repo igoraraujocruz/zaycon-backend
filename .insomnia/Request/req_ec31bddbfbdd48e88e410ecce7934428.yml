@@ -1,0 +1,33 @@
+_id: req_ec31bddbfbdd48e88e410ecce7934428
+type: Request
+parentId: fld_62e083db7440430ca0f830b6175a331e
+modified: 1675174311691
+created: 1675174054242
+url: https://api-pix.gerencianet.com.br/oauth/token
+name: Auth
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"grant_type": "client_credentials"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: Client_Id_78fbf5ca27ddf55a8e88d103c4d6e11074a8e8c7
+  password: Client_Secret_8628defb5f7a042f32b873702064156b30894aff
+metaSortKey: -1675174054242
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

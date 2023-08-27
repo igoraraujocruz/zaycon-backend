@@ -1,0 +1,32 @@
+_id: req_aded43417e6b4c0a9921370fd53ffe65
+type: Request
+parentId: fld_d2b90ede62754f098ca55f3a472f27a2
+modified: 1674853199804
+created: 1674083704070
+url: "{{ _.host }}/shop/gerencianet/webhook"
+name: Receive Paiment (Receber pagamento - Gerencianet)
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"pix": [
+    		{
+    			"txid": "dae3e5f438e94f48819223dc4b4c70a7"
+    		}
+    	]
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674083704070
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

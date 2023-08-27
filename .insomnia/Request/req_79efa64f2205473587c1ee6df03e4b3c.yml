@@ -1,0 +1,33 @@
+_id: req_79efa64f2205473587c1ee6df03e4b3c
+type: Request
+parentId: fld_5ba43e141fe74acc8c65bb05ff47b612
+modified: 1692224383826
+created: 1674851558656
+url: "{{ _.host }}/sellers"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name": "admin",
+    	"username": "admin",
+    	"email": "admin@gmail.com",
+    	"numberPhone": "(27) 99796-8654",
+    	"password": "123456",
+    	"birthday": "{% now 'unix', '' %}"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674851622752.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

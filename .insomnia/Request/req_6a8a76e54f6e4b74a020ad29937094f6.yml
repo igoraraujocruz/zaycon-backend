@@ -1,0 +1,28 @@
+_id: req_6a8a76e54f6e4b74a020ad29937094f6
+type: Request
+parentId: fld_5ba43e141fe74acc8c65bb05ff47b612
+modified: 1674852375088
+created: 1674851811104
+url: "{{ _.host }}/sellers/forgotPassword"
+name: Forgot Password
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"email": "zezinho@gmail.com"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674798415981.6562
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

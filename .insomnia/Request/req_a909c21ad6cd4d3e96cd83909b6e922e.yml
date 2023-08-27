@@ -1,0 +1,31 @@
+_id: req_a909c21ad6cd4d3e96cd83909b6e922e
+type: Request
+parentId: fld_d2b90ede62754f098ca55f3a472f27a2
+modified: 1674853083843
+created: 1674852804146
+url: "{{ _.host }}/shop"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"clientId": "a0055e54-c5f9-4310-97b5-9bfb866c6e42",
+    	"socketId": "socket.io",
+    	"sellerId": "7d6b1a22-4c3e-465a-a69f-2c0ab10994f4",
+    	"typeOfPayment": "pix"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674852914134
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

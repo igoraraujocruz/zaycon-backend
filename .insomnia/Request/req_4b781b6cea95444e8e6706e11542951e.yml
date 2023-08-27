@@ -1,0 +1,36 @@
+_id: req_4b781b6cea95444e8e6706e11542951e
+type: Request
+parentId: fld_e03d0f109048491d9fd21713001d40a5
+modified: 1674344763316
+created: 1674342388521
+url: "{{ _.host }}/products"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name": "Celular",
+    	"description": "é bom",
+    	"amount": 200,
+    	"price": 10,
+    	"points": 200,
+    	"category": "Audio"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+  disabled: false
+metaSortKey: -1674169429213.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

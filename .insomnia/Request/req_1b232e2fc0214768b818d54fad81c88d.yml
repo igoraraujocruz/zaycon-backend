@@ -1,0 +1,30 @@
+_id: req_1b232e2fc0214768b818d54fad81c88d
+type: Request
+parentId: fld_64cc9fd09fa74bc2b9432de9e548604a
+modified: 1675035759669
+created: 1675024266935
+url: "{{ _.host }}/sellerOrders"
+name: Create ({ ?ProductId })
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"productId": "2acb4354-6d68-4897-a409-fea0c060a302"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1675024266935
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

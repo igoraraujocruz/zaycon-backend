@@ -1,0 +1,23 @@
+_id: req_1b5c263a71234b1096a325b09f3fcf73
+type: Request
+parentId: fld_6cf2c192fbb040f4a2d2d1ab3d46aa85
+modified: 1692924736181
+created: 1692924732877
+url: "{{ _.host }}/photos/c095fd74-5d72-4626-a485-4434cc5f583a"
+name: New Request
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: Insomnia/2023.5.3
+authentication: {}
+metaSortKey: -1692924732877
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

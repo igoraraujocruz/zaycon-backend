@@ -1,0 +1,23 @@
+_id: req_ef2cc8ba9cff46209e1770894c3c62f9
+type: Request
+parentId: fld_61a42c454ba6440d878736d996351545
+modified: 1674849995981
+created: 1674849739120
+url: "{{ _.dev }}/clients"
+name: All
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1674849739120
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

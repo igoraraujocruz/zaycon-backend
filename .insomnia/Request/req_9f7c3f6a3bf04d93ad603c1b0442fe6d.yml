@@ -1,0 +1,24 @@
+_id: req_9f7c3f6a3bf04d93ad603c1b0442fe6d
+type: Request
+parentId: fld_5ba43e141fe74acc8c65bb05ff47b612
+modified: 1674852833707
+created: 1674852307768
+url: "{{ _.host }}/sellers/me"
+name: Me
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+  disabled: false
+metaSortKey: -1674780680391.375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

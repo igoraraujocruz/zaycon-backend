@@ -1,0 +1,21 @@
+_id: req_28ca5fc8e0fa40e3bac6a110ec94aa21
+type: Request
+parentId: fld_5ba43e141fe74acc8c65bb05ff47b612
+modified: 1674852359344
+created: 1674851686849
+url: "{{ _.host }}/sellers/confirmEmail/eedcaad4-d84d-4a8a-96b6-ef9f43b94385"
+name: Confirm Email
+description: ""
+method: POST
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1674816151571.9375
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,23 @@
+_id: req_dfad6c230e59451580760a6d2d357ad4
+type: Request
+parentId: fld_d2b90ede62754f098ca55f3a472f27a2
+modified: 1674853453997
+created: 1674083502063
+url: "{{ _.host }}/shop"
+name: All (?sellerId, ?shopId)
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1674083502063
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

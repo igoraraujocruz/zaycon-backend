@@ -1,0 +1,29 @@
+_id: req_040490e5a6e54ff3831a0b9d47f675f4
+type: Request
+parentId: fld_5ba43e141fe74acc8c65bb05ff47b612
+modified: 1674852379004
+created: 1674851869487
+url: "{{ _.host }}/sellers/reset/c83037fa-e5d5-4189-bb66-d289b698d284"
+name: Reset Password
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"password": "123456789",
+    	"password_confirmation": "123456789"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674789548186.5156
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

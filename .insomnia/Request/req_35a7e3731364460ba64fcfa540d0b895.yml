@@ -1,0 +1,23 @@
+_id: req_35a7e3731364460ba64fcfa540d0b895
+type: Request
+parentId: fld_64cc9fd09fa74bc2b9432de9e548604a
+modified: 1675093933791
+created: 1675093791799
+url: "{{ _.host }}/sellerOrders/ce6d24fc-cd7e-46d0-8bdb-af0534c23369"
+name: Change answered for true
+description: ""
+method: PATCH
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1675093791799
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

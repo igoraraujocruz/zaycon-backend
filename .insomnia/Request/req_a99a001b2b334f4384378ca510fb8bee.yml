@@ -1,0 +1,25 @@
+_id: req_a99a001b2b334f4384378ca510fb8bee
+type: Request
+parentId: fld_61368635284943b7844df35e88aeb85f
+modified: 1692927358916
+created: 1692925703685
+url: "{{ _.host }}/banners"
+name: GetAll
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: Insomnia/2023.5.3
+authentication:
+  type: bearer
+  token: ""
+metaSortKey: -1688208043830
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

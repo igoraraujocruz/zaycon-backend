@@ -1,0 +1,35 @@
+_id: req_996634300af64c709f7a35ed8c331bf2
+type: Request
+parentId: fld_61a42c454ba6440d878736d996351545
+modified: 1674850202969
+created: 1674673295643
+url: "{{ _.host }}/clients/address"
+name: Endereco
+description: Aqui busca o endereço
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"address": {
+    		"cep": "29032-570",
+    		"logradouro": "Rua América do Sul",
+    		"bairro": "Resistência",
+    		"localidade": "Vitória",
+    		"uf": "ES",
+    		"residenceNumber": "31"
+    	}
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674673295643
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: false
+settingFollowRedirects: global

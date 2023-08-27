@@ -1,0 +1,23 @@
+_id: req_fd616919a14d4b7d8e3371da5c1e3cdd
+type: Request
+parentId: fld_5ba43e141fe74acc8c65bb05ff47b612
+modified: 1674852401820
+created: 1674567853308
+url: "{{ _.host }}/sellers"
+name: All (?sellerName, ?sellerUsername)
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1674785114288.9453
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

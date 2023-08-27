@@ -1,0 +1,25 @@
+_id: req_ef8fcca65ea84999ac03d57d75b01359
+type: Request
+parentId: fld_61368635284943b7844df35e88aeb85f
+modified: 1692925277190
+created: 1692924740038
+url: "{{ _.host }}/banners/27aa5236-592c-4398-95a7-754bf5522ab6"
+name: Delete
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: Insomnia/2023.5.3
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+metaSortKey: -1692924740038
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
